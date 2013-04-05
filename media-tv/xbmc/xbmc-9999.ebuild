@@ -34,12 +34,14 @@ HOMEPAGE="http://xbmc.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay airtunes alsa altivec avahi bluetooth bluray cec css debug fishbmc goom java joystick midi mysql nfs profile +projectm pulseaudio pvr +rsxs rtmp +samba sftp sse sse2 udev upnp udisks upower usb vaapi vdpau webserver +xrandr"
-REQUIRED_USE="pvr? ( mysql )"
+IUSE="afp airplay airtunes alsa altivec avahi bluetooth bluray caps cec css debug fishbmc gles goom java joystick midi mysql neon nfs +opengl profile projectm pulseaudio pvr rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+REQUIRED_USE="
+	pvr? ( mysql )
+	rsxs? ( X )
+	xrandr? ( X )
+"
 
-COMMON_DEPEND="virtual/opengl
-	usb? ( virtual/libusb:0 )
-	app-arch/bzip2
+COMMON_DEPEND="app-arch/bzip2
 	app-arch/unzip
 	app-arch/zip
 	app-i18n/enca
@@ -48,7 +50,7 @@ COMMON_DEPEND="virtual/opengl
 	dev-libs/boost
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
-	cec? ( >=dev-libs/libcec-2 )
+	cec? ( >=dev-libs/libcec-2.1 )
 	dev-libs/libpcre[cxx]
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
@@ -73,15 +75,17 @@ COMMON_DEPEND="virtual/opengl
 	media-libs/libpng
 	projectm? ( media-libs/libprojectm )
 	media-libs/libsamplerate
-	media-libs/libsdl[audio,opengl,video,X]
+	sdl? ( media-libs/libsdl[audio,opengl,video,X] )
 	alsa? ( media-libs/libsdl[alsa] )
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
+	sdl? (
+		media-libs/sdl-gfx
+		>=media-libs/sdl-image-1.2.10[gif,jpeg,png]
+		media-libs/sdl-mixer
+		media-libs/sdl-sound
+	)
 	airtunes? ( media-plugins/xbmc-addon-libshairport )
-	media-libs/sdl-gfx
-	>=media-libs/sdl-image-1.2.10[gif,jpeg,png]
-	media-libs/sdl-mixer
-	media-libs/sdl-sound
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
@@ -97,19 +101,28 @@ COMMON_DEPEND="virtual/opengl
 	samba? ( >=net-fs/samba-3.4.6[smbclient] )
 	bluetooth? ( net-wireless/bluez )
 	sys-apps/dbus
+	caps? ( sys-libs/libcap )
 	sys-libs/zlib
 	virtual/jpeg
+	usb? ( virtual/libusb )
 	mysql? ( virtual/mysql )
-	x11-apps/xdpyinfo
-	x11-apps/mesa-progs
+	opengl? (
+		virtual/glu
+		virtual/opengl
+	)
+	gles? ( virtual/opengl )
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
 		|| ( x11-libs/libvdpau >=x11-drivers/nvidia-drivers-180.51 )
 		virtual/ffmpeg[vdpau]
 	)
-	x11-libs/libXinerama
-	xrandr? ( x11-libs/libXrandr )
-	x11-libs/libXrender"
+	X? (
+		x11-apps/xdpyinfo
+		x11-apps/mesa-progs
+		x11-libs/libXinerama
+		xrandr? ( x11-libs/libXrandr )
+		x11-libs/libXrender
+	)"
 RDEPEND="${COMMON_DEPEND}
 	udev? (
 		udisks? ( sys-fs/udisks:0 )
@@ -170,9 +183,9 @@ src_prepare() {
 	export HAVE_GIT=no GIT_REV=${EGIT_VERSION:-exported}
 
 	# avoid long delays when powerkit isn't running #348580
-	# sed -i \
-	#	-e '/dbus_connection_send_with_reply_and_block/s:-1:3000:' \
-	#	xbmc/linux/*.cpp || die
+	sed -i \
+		-e '/dbus_connection_send_with_reply_and_block/s:-1:3000:' \
+		xbmc/linux/*.cpp || die
 
 	epatch_user #293109
 
@@ -192,12 +205,12 @@ src_configure() {
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
+		--disable-optimizations \
+		--disable-external-ffmpeg \
 		--enable-ccache \
 		--enable-external-libraries \
-		--disable-external-ffmpeg \
 		--enable-ffmpeg-libvorbis \
 		--enable-gl \
-		--disable-optimizations \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
 		$(use_enable airtunes) \
@@ -207,12 +220,15 @@ src_configure() {
 		$(use_enable css dvdcss) \
 		$(use_enable debug) \
 		$(use_enable fishbmc) \
+		$(use_enable gles) \
 		$(use_enable goom) \
 		--disable-hal \
 		$(use_enable joystick) \
 		$(use_enable midi mid) \
 		$(use_enable mysql) \
+		$(use_enable neon) \
 		$(use_enable nfs) \
+		$(use_enable opengl gl) \
 		$(use_enable profile profiling) \
 		$(use_enable projectm) \
 		$(use_enable pulseaudio pulse) \
@@ -220,13 +236,15 @@ src_configure() {
 		$(use_enable rsxs) \
 		$(use_enable rtmp) \
 		$(use_enable samba) \
+		$(use_enable sdl) \
 		$(use_enable sftp ssh) \
+		$(use_enable usb libusb) \
 		$(use_enable udev) \
 		$(use_enable upnp) \
-		$(use_enable usb libusb) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \
 		$(use_enable webserver) \
+		$(use_enable X x11) \
 		$(use_enable xrandr)
 }
 
@@ -244,13 +262,12 @@ src_install() {
     # them into same structure like they have in git.
     rm -rf "${ED}"/usr/share/xbmc/system/players/dvdplayer/etc
 
-    # Replace bundled fonts with system ones
-    # corefonts: arial ; unknown source teletext.ttf
-    rm -rf "${ED}"/usr/share/xbmc/media/Fonts/arial.ttf
-    dosym /usr/share/fonts/corefonts/arial.ttf \
-        /usr/share/xbmc/media/Fonts/arial.ttf
-    # roboto: roboto-bold, roboto-regular ; unknown source: bold-caps
-    rm -rf "${ED}"/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-*
+	# Replace bundled fonts with system ones
+    # teletext.ttf: unknown
+    # bold-caps.ttf: unknown
+    # roboto: roboto-bold, roboto-regular
+    # arial.ttf: font mashed from droid/roboto, not removed wrt bug#460514
+	rm -rf "${ED}"/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-*
     dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
         /usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Regular.ttf
     dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
