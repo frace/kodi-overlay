@@ -1,7 +1,3 @@
-# Copyright 1999-2011 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/qingy/qingy-1.0.0.ebuild,v 1.4 2011/01/11 12:25:06 xarthisius Exp $
-
 EAPI="2"
 
 inherit elisp-common eutils pam autotools
