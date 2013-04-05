@@ -1,0 +1,209 @@
+diff -bpur qingy-1.0.0.orig//src/libraries/session.c qingy-1.0.0.prod//src/libraries/session.c
+--- qingy-1.0.0.orig//src/libraries/session.c	2010-12-07 22:44:41.000000000 +0900
++++ qingy-1.0.0.prod//src/libraries/session.c	2011-07-06 17:11:48.344527802 +0900
+@@ -440,8 +440,6 @@ int check_password(char *username, char
+   char *password;
+ #ifdef USE_PAM
+   int retcode;
+-  char *ttyname;
+-  char *short_ttyname;
+ #else
+   char*  correct;
+ #ifdef HAVE_LIBCRYPT
+@@ -468,30 +466,14 @@ int check_password(char *username, char
+ 	}
+   
+ #ifdef USE_PAM
++  /* Setup of PAM_TTY have been moved to new func set_pam_tty_to_current_tty(). */
++  /* Because current vt is not the vt that going to run session actual in mostly cases. */
+   PAM_password = (char *)password;
+-  ttyname = create_tty_name(get_active_tty());
+-  if ((short_ttyname = strrchr(ttyname, '/')) != NULL)
+-	if (*(++short_ttyname) == '\0') short_ttyname = NULL;
+   if (pam_start("qingy", username, &PAM_conversation, &pamh) != PAM_SUCCESS)
+ 	{
+ 		LogEvent(pw, PAM_FAILURE);
+ 		return 0;
+ 	}
+-	if (!short_ttyname)
+-		retcode = pam_set_item(pamh, PAM_TTY, ttyname);
+-	else
+-	{
+-		retcode = pam_set_item(pamh, PAM_TTY, short_ttyname);
+-		if (retcode != PAM_SUCCESS)
+-			retcode = pam_set_item(pamh, PAM_TTY, ttyname);
+-	}
+-  if (retcode != PAM_SUCCESS)
+-	{
+-		pam_end(pamh, retcode);
+-		pamh = NULL;
+-		LogEvent(pw, PAM_FAILURE);
+-		return 0;
+-	}
+   if ((retcode = pam_set_item(pamh, PAM_RHOST, "")) != PAM_SUCCESS)
+ 	{
+ 		pam_end(pamh, retcode);
+@@ -556,6 +538,40 @@ int check_password(char *username, char
+ #endif /* End of USE_PAM */
+ }
+ 
++#ifdef USE_PAM
++int autologin_pam_start (char *username)
++{
++	struct passwd *pw;
++
++	int retcode;
++	
++	pw = getpwnam(username);
++	endpwent();
++	if (!pw)
++	{
++		struct passwd pwd;
++      
++		pwd.pw_name = username;
++		LogEvent(&pwd, UNKNOWN_USER);
++		return 0;
++	}
++	if (pam_start("qingy", username, &PAM_conversation, &pamh) != PAM_SUCCESS)
++	{
++		return 0;
++	}
++	if ((retcode = pam_set_item(pamh, PAM_RHOST, "")) != PAM_SUCCESS)
++	{
++		pam_end(pamh, retcode);
++		pamh = NULL;
++		LogEvent(pw, PAM_FAILURE);
++		return 0;
++	}
++	free (infostr); free (errstr);
++	
++	return 1;
++}
++#endif
++
+ static char *shell_base_name(char *name)
+ {
+   char *base = name;
+@@ -795,6 +811,66 @@ void remove_utmp_entry(void)
+ 	endutent ();
+ }
+ 
++#ifdef USE_PAM
++/* Setting up PAM_TTY. */
++/* and CKCON_X11_DISPLAY_DEVICE for graphical session. */
++/* x_display == -1 means text session. */
++int set_pam_tty_to_current_tty(int cur_tty, int x_display)
++{
++	int retcode;
++	char *tty_for_pam;
++	char *short_tty_for_pam;
++	char *x11_display;
++	char *x11_display_device;
++	
++	tty_for_pam = create_tty_name(cur_tty);
++	if ((short_tty_for_pam = strrchr(tty_for_pam, '/')) != NULL)
++		if (*(++short_tty_for_pam) == '\0') short_tty_for_pam = NULL;
++
++	if ( x_display == -1 ) /* session is text session. */
++	{
++		if (!short_tty_for_pam)
++		{
++			retcode = pam_set_item(pamh, PAM_TTY, tty_for_pam);
++		}
++		else
++		{
++			retcode = pam_set_item(pamh, PAM_TTY, short_tty_for_pam);
++			if (retcode != PAM_SUCCESS)
++			{
++				retcode = pam_set_item(pamh, PAM_TTY, tty_for_pam);
++			}
++		}
++		if (retcode != PAM_SUCCESS)
++		{
++			WRITELOG (ERROR, "Something wrong with setting PAM_TTY to %s\n", tty_for_pam);
++			return 0;
++		}
++	}
++	else /* session is graphical. */
++	{
++		x11_display = StrApp ((char **)NULL, ":", int_to_str(x_display), (char*)NULL);
++		retcode = pam_set_item (pamh, PAM_TTY, x11_display);
++		if (retcode != PAM_SUCCESS)
++		{
++			WRITELOG (ERROR, "Something wrong with setting PAM_TTY to %s\n", x11_display);
++			return 0;
++		}
++		x11_display_device = StrApp ((char**)NULL, "CKCON_X11_DISPLAY_DEVICE=", tty_for_pam, (char*)NULL);
++		pam_putenv (pamh, x11_display_device);
++		if (retcode != PAM_SUCCESS)
++		{
++			writelog (ERROR, "Setting CKCON_X11_DISPLAY_DEVICE failed.\n");
++			return 0;
++		}
++		
++	}
++	free (infostr); free (errstr);
++
++	return 1;
++}
++#endif
++
+ void Text_Login(struct passwd *pw, char *session, char *username)
+ {
+   pid_t proc_id;
+@@ -824,6 +900,12 @@ void Text_Login(struct passwd *pw, char
+ 			WRITELOG(DEBUG, "Starting text session with argument #%d: %s\n", i, args[i]);
+ 
+ #ifdef USE_PAM
++	/* We set PAM_TTY to current_vt. */
++	/* This is important for DirectFB GUI login screen. */
++	/* DirectFB runs on unused tty. */
++	/* But that tty is not the tty which we are going to start session for. */
++	if(!set_pam_tty_to_current_tty(current_vt, -1))
++	  writelog (ERROR, "Something wrong with pam_tty_set_to_current_tty(). But we keep going.\n");
+ 		pam_open_session(pamh, 0);
+ #else
+ 		LogEvent(pw, OPEN_SESSION);
+@@ -1016,7 +1098,12 @@ void Graph_Login(struct passwd *pw, char
+   free(vt);
+ 
+ #ifdef USE_PAM
++  /* At graphical session, PAM_TTY is set to $DISPLAY. */
++  /* and CKCON_X11_DISPLAY_DEVICE(needed by pam_ck_connector.so) is set to proper tty. */
++  if(!set_pam_tty_to_current_tty(x_vt, x_offset))
++	  writelog (ERROR, "Something wrong with setting PAM_TTY and CKCON_X11_DISPLAY_DEVICE. But we keep going.\n");
+ 		pam_open_session(pamh, 0);
++  pam_putenv(pamh, "CKCON_X11_DISPLAY_DEVICE");
+ #else
+ 		LogEvent(pw, OPEN_SESSION);
+ #endif
+diff -bpur qingy-1.0.0.orig//src/libraries/session.h qingy-1.0.0.prod//src/libraries/session.h
+--- qingy-1.0.0.orig//src/libraries/session.h	2008-07-09 00:04:45.000000000 +0900
++++ qingy-1.0.0.prod//src/libraries/session.h	2011-07-06 16:26:12.035736415 +0900
+@@ -41,3 +41,6 @@ void start_session(char *username, char
+ 
+ /* sort sessions */
+ void sort_sessions(char **sessions, int n_items);
++
++/* PAM initialization for autologin */
++int autologin_pam_start(char *username);
+diff -bpur qingy-1.0.0.orig//src/main.c qingy-1.0.0.prod//src/main.c
+--- qingy-1.0.0.orig//src/main.c	2008-11-26 01:04:58.000000000 +0900
++++ qingy-1.0.0.prod//src/main.c	2011-07-06 16:26:12.036736401 +0900
+@@ -356,6 +356,16 @@ void start_up(int argc, char *argv[], in
+ 	/* return to our righteous tty */
+ 	set_active_tty(our_tty_number);
+ 
++#ifdef USE_PAM
++	/* PAM initialization for autologin. */
++	if (do_autologin)
++	{
++		if (!autologin_pam_start(username))
++			/* Keep going. */
++			writelog (ERROR, "autologin pam initialization failed.\n");
++	}
++#endif
++	
+ 	switch (returnstatus)
+ 	{
+ 		case EXIT_SUCCESS:
