@@ -1,0 +1,39 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+PID=/var/run/istatd/istat.pid
+
+checkTmp() {
+    if ! [ -d "/var/{run,cache}/istat" ]; then
+        mkdir -p /var/{run,cache}/istatd
+        chown istatd:istatd /var/{run,cache}/istatd
+    fi
+}
+
+depend() {
+    need net
+}
+
+start() {
+	ebegin "Starting istatd"
+    checkTmp
+	start-stop-daemon --start \
+		--exec /usr/bin/istatd \
+		--make-pidfile \
+		--chuid istatd:istatd \
+		--pidfile ${PID} \
+		--background \
+		-- "${ISTATD_OPTS}" \
+		>> /var/log/istatd 2>&1
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping istatd"
+	start-stop-daemon --stop \
+		--pidfile ${PID}
+	eend $?
+}
+
