@@ -255,31 +255,18 @@ src_install() {
 	domenu tools/Linux/xbmc.desktop
 	newicon tools/Linux/xbmc-48x48.png xbmc.png
 
-	# Remove visualization and screensaver addons if they are disabled by USE flags
-	if ! use fishbmc ; then
-		rm -rf "${ED}/usr/share/xbmc/addons/visualization.fishbmc"
-	fi
+    # Remove optional addons (platform specific and disabled by use flag)
+    local disabled_addons=(
+        repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
+        visualization.dxspectrum
+    )
+    use fishbmc || disabled_addons+=( visualization.fishbmc )
+    use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
+    use rsxs || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
 
-	if ! use projectm ; then
-		rm -rf "${ED}/usr/share/xbmc/addons/visualization.projectm"
-		rm -rf "${ED}/usr/share/xbmc/addons/visualization.milkdrop"
-	fi
+    rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
 
-	if ! use rsxs ; then
-		rm -rf "${ED}/usr/share/xbmc/addons/screensaver.rsxs.euphoria"
-		rm -rf "${ED}/usr/share/xbmc/addons/screensaver.rsxs.plasma"
-		rm -rf "${ED}/usr/share/xbmc/addons/screensaver.rsxs.solarwinds"
-	fi
-
-	# remove addons built for non linux operating systems
-	rm -rf "${ED}/usr/share/xbmc/addons/repository.pvr-android.xbmc.org"
-	rm -rf "${ED}/usr/share/xbmc/addons/repository.pvr-ios.xbmc.org"
-	rm -rf "${ED}/usr/share/xbmc/addons/repository.pvr-osx32.xbmc.org"
-	rm -rf "${ED}/usr/share/xbmc/addons/repository.pvr-osx64.xbmc.org"
-	rm -rf "${ED}/usr/share/xbmc/addons/repository.pvr-win32.xbmc.org"
-	rm -rf "${ED}/usr/share/xbmc/addons/visualization.dxspectrum"
-
-    # punt simplejson bundle, we use the system one anyway
+    # Punt simplejson bundle, we use the system one anyway
     rm -rf "${ED}"/usr/share/xbmc/addons/script.module.simplejson/lib
     # Remove fonconfig settings that are used only on MacOSX.
     # Can't be patched upstream because they just find all files and install
