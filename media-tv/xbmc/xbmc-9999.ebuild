@@ -1,11 +1,11 @@
-EAPI="4"
+EAPI="5"
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
-PYTHON_DEPEND="2:2.6"
-PYTHON_USE_WITH=sqlite
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_USE_WITH="sqlite"
 
-inherit eutils python multiprocessing autotools
+inherit eutils python-single-r1 multiprocessing autotools
 
 case ${PV} in
 9999)
@@ -13,7 +13,7 @@ case ${PV} in
     # EGIT_REPO_URI="git://github.com/gnif/xbmc.git"
     # EGIT_BRANCH="ae_rebase"
     inherit git-2
-    SRC_URI="!java? ( mirror://gentoo/${P}-20121224-generated-addons.tar.xz )"
+    SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
     ;;
 *_alpha*|*_beta*|*_rc*)
     MY_PV="Frodo_${PV#*_}"
@@ -34,14 +34,16 @@ HOMEPAGE="http://xbmc.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug fishbmc gles goom java joystick midi mysql neon nfs +opengl profile projectm pulseaudio pvr rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql neon nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
+	X? ( sdl )
 	xrandr? ( X )
 "
 
-COMMON_DEPEND="app-arch/bzip2
+COMMON_DEPEND="${PYTHON_DEPS}
+	app-arch/bzip2
 	app-arch/unzip
 	app-arch/zip
 	app-i18n/enca
@@ -58,7 +60,7 @@ COMMON_DEPEND="app-arch/bzip2
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
 	dev-libs/yajl
-    dev-python/simplejson
+    dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
 	media-fonts/roboto
 	media-libs/alsa-lib
@@ -91,7 +93,7 @@ COMMON_DEPEND="app-arch/bzip2
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	|| ( media-libs/libpostproc <media-video/libav-0.8.2-r1 media-video/ffmpeg )
+	|| ( media-libs/libpostproc media-video/ffmpeg )
 	>=virtual/ffmpeg-0.6[encode]
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
@@ -139,9 +141,10 @@ DEPEND="${COMMON_DEPEND}
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )"
 
+S=${WORKDIR}/${MY_P}
+
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-single-r1_pkg_setup
 }
 
 src_unpack() {
@@ -151,6 +154,7 @@ src_unpack() {
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-9999-nomythtv.patch
 	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
+	epatch "${FILESDIR}"/${PN}-13.0-system-projectm.patch
 	# The mythtv patch touches configure.ac, so force a regen
 	rm -f configure
 
@@ -264,7 +268,6 @@ src_install() {
     use fishbmc || disabled_addons+=( visualization.fishbmc )
     use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
     use rsxs || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
-
     rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
 
     # Punt simplejson bundle, we use the system one anyway
@@ -285,9 +288,8 @@ src_install() {
     dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
         /usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
-    insinto "$(python_get_sitedir)" #309885
-    doins tools/EventClients/lib/python/xbmcclient.py || die
-    newbin "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send || die
+	python_domodule tools/EventClients/lib/python/xbmcclient.py
+    python_newscript "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send
 }
 
 pkg_postinst() {
