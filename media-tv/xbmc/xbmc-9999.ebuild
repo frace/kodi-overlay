@@ -34,7 +34,7 @@ HOMEPAGE="http://xbmc.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay airtunes alsa altivec avahi bluetooth bluray caps cec css debug fishbmc gles goom java joystick midi mysql neon nfs +opengl profile projectm pulseaudio pvr rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug fishbmc gles goom java joystick midi mysql neon nfs +opengl profile projectm pulseaudio pvr rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -45,7 +45,10 @@ COMMON_DEPEND="app-arch/bzip2
 	app-arch/unzip
 	app-arch/zip
 	app-i18n/enca
-	airplay? ( app-pda/libplist )
+	airplay? (
+		app-pda/libplist
+		media-plugins/xbmc-addon-libshairplay
+	)
 	>=dev-lang/python-2.4
 	dev-libs/boost
 	dev-libs/fribidi
@@ -85,7 +88,6 @@ COMMON_DEPEND="app-arch/bzip2
 		media-libs/sdl-mixer
 		media-libs/sdl-sound
 	)
-	airtunes? ( media-plugins/xbmc-addon-libshairport )
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
@@ -213,7 +215,6 @@ src_configure() {
 		--enable-gl \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
-		$(use_enable airtunes) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
 		$(use_enable cec libcec) \
