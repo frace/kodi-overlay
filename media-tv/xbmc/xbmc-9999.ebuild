@@ -1,4 +1,4 @@
-EAPI="5"
+EAPI=5
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
@@ -51,7 +51,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		app-pda/libplist
 		media-plugins/xbmc-addon-libshairplay
 	)
-	>=dev-lang/python-2.4
 	dev-libs/boost
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
@@ -93,8 +92,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	|| ( media-libs/libpostproc media-video/ffmpeg )
-	>=virtual/ffmpeg-0.6[encode]
+	|| ( >=media-video/ffmpeg-1.0[encode] ( media-libs/libpostproc >=media-video/libav-9[encode] )
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	afp? ( net-fs/afpfs-ng )
@@ -211,11 +209,9 @@ src_configure() {
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
-		--disable-optimizations \
-		--disable-external-ffmpeg \
 		--enable-ccache \
+		--disable-optimizations \
 		--enable-external-libraries \
-		--enable-ffmpeg-libvorbis \
 		--enable-gl \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
