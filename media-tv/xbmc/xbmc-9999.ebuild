@@ -92,7 +92,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	|| ( >=media-video/ffmpeg-1.0[encode] ( media-libs/libpostproc >=media-video/libav-9[encode] )
+	|| ( >=media-video/ffmpeg-1.0[encode] ( media-libs/libpostproc >=media-video/libav-9[encode] ) )
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	afp? ( net-fs/afpfs-ng )
@@ -212,6 +212,7 @@ src_configure() {
 		--enable-ccache \
 		--disable-optimizations \
 		--enable-external-libraries \
+		--disable-external-ffmpeg \
 		--enable-gl \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
