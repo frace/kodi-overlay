@@ -25,7 +25,7 @@ RDEPEND=">=sys-libs/ncurses-5.4-r6
 					x11-proto/scrnsaverproto )"
 
 DEPEND="${RDEPEND}
-	>=dev-util/pkgconfig-0.12.0
+	virtual/pkgconfig
 	>=sys-apps/sed-4.1.4-r1"
 RDEPEND="${RDEPEND}
 	pam? ( sys-auth/pambase )"
