@@ -1,9 +1,9 @@
-EAPI=5
+EAPI="5"
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
 PYTHON_COMPAT=( python{2_6,2_7} )
-PYTHON_USE_WITH="sqlite"
+PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
 
@@ -98,7 +98,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	afp? ( net-fs/afpfs-ng )
 	nfs? ( net-fs/libnfs )
 	webserver? ( net-libs/libmicrohttpd[messages] )
-	sftp? ( net-libs/libssh )
+	sftp? ( net-libs/libssh[sftp] )
 	net-misc/curl
 	samba? ( >=net-fs/samba-3.4.6[smbclient] )
 	bluetooth? ( net-wireless/bluez )
@@ -134,7 +134,7 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
-	x11-proto/xineramaproto
+	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )"
@@ -143,12 +143,13 @@ S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
 	python-single-r1_pkg_setup
-		if has_version 'media-video/libav' ; then
-			ewarn "Building ${PN} against media-video/libav is not supported upstream."
-			ewarn "It requires building a (small) wrapper library with some code"
-			ewarn "from media-video/ffmpeg."
-			ewarn "If you experience issues, please try with media-video/ffmpeg."
-		fi
+
+	if has_version 'media-video/libav' ; then
+		ewarn "Building ${PN} against media-video/libav is not supported upstream."
+		ewarn "It requires building a (small) wrapper library with some code"
+		ewarn "from media-video/ffmpeg."
+		ewarn "If you experience issues, please try with media-video/ffmpeg."
+	fi
 }
 
 src_unpack() {
@@ -264,17 +265,17 @@ src_install() {
 	domenu tools/Linux/xbmc.desktop
 	newicon tools/Linux/xbmc-48x48.png xbmc.png
 
-	# Remove optional addons (platform specific and disabled by use flag)
+	# Remove optional addons (platform specific and disabled by USE flag).
 	local disabled_addons=(
 		repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
 		visualization.dxspectrum
 	)
-	use fishbmc || disabled_addons+=( visualization.fishbmc )
+	use fishbmc  || disabled_addons+=( visualization.fishbmc )
 	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
-	use rsxs || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
+	use rsxs     || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
 	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
 
-	# Punt simplejson bundle, we use the system one anyway
+	# Punt simplejson bundle, we use the system one anyway.
 	rm -rf "${ED}"/usr/share/xbmc/addons/script.module.simplejson/lib
 	# Remove fonconfig settings that are used only on MacOSX.
 	# Can't be patched upstream because they just find all files and install
