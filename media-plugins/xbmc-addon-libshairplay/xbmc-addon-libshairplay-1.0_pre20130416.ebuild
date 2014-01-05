@@ -17,7 +17,7 @@ SLOT="0"
 IUSE="static-libs"
 
 COMMON_DEPEND=">=dev-libs/openssl-1.0.0
-           	   media-libs/libao"
+				media-libs/libao"
 RDEPEND="${COMMON_DEPEND}"
 DEPEND="${COMMON_DEPEND}"
 

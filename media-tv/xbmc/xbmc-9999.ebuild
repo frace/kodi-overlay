@@ -1,32 +1,32 @@
-EAPI=5
+EAPI="5"
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
 PYTHON_COMPAT=( python{2_6,2_7} )
-PYTHON_USE_WITH="sqlite"
+PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
 
 case ${PV} in
 9999)
-    EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
-    # EGIT_REPO_URI="git://github.com/gnif/xbmc.git"
-    # EGIT_BRANCH="ae_rebase"
-    inherit git-2
-    SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
-    ;;
+	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
+	# EGIT_REPO_URI="git://github.com/gnif/xbmc.git"
+	# EGIT_BRANCH="ae_rebase"
+	inherit git-2
+	SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
+	;;
 *_alpha*|*_beta*|*_rc*)
-    MY_PV="Frodo_${PV#*_}"
-    MY_P="${PN}-${MY_PV}"
-    SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz -> ${P}.tar.gz
-        !java? ( mirror://gentoo/${P}-generated-addons.tar.xz )"
-    KEYWORDS="~amd64 ~x86"
-    ;;
+	MY_PV="Frodo_${PV#*_}"
+	MY_P="${PN}-${MY_PV}"
+	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz -> ${P}.tar.gz
+		!java? ( mirror://gentoo/${P}-generated-addons.tar.xz )"
+	KEYWORDS="~amd64 ~x86"
+	;;
 *)
-    MY_P=${P/_/-*_}
-    SRC_URI="http://mirrors.xbmc.org/releases/source/${MY_P}.tar.gz"
-    KEYWORDS="~amd64 ~x86"
-    ;;
+	MY_P=${P/_/-*_}
+	SRC_URI="http://mirrors.xbmc.org/releases/source/${MY_P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
+	;;
 esac
 
 DESCRIPTION="XBMC is a free and open source media-player and entertainment hub"
@@ -59,7 +59,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
 	dev-libs/yajl
-    dev-python/simplejson[${PYTHON_USEDEP}]
+	dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
 	media-fonts/roboto
 	media-libs/alsa-lib
@@ -98,7 +98,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	afp? ( net-fs/afpfs-ng )
 	nfs? ( net-fs/libnfs )
 	webserver? ( net-libs/libmicrohttpd[messages] )
-	sftp? ( net-libs/libssh )
+	sftp? ( net-libs/libssh[sftp] )
 	net-misc/curl
 	samba? ( >=net-fs/samba-3.4.6[smbclient] )
 	bluetooth? ( net-wireless/bluez )
@@ -134,7 +134,7 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
-	x11-proto/xineramaproto
+	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )"
@@ -143,12 +143,13 @@ S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
 	python-single-r1_pkg_setup
-  	  	if has_version 'media-video/libav' ; then
-			ewarn "Building ${PN} against media-video/libav is not supported upstream."
-			ewarn "It requires building a (small) wrapper library with some code"
-			ewarn "from media-video/ffmpeg."
-			ewarn "If you experience issues, please try with media-video/ffmpeg."
-		fi
+
+	if has_version 'media-video/libav' ; then
+		ewarn "Building ${PN} against media-video/libav is not supported upstream."
+		ewarn "It requires building a (small) wrapper library with some code"
+		ewarn "from media-video/ffmpeg."
+		ewarn "If you experience issues, please try with media-video/ffmpeg."
+	fi
 }
 
 src_unpack() {
@@ -166,14 +167,14 @@ src_prepare() {
 	multijob_init
 	local d
 	for d in $(printf 'f:\n\t@echo $(BOOTSTRAP_TARGETS)\ninclude bootstrap.mk\n' | emake -f - f) ; do
-        [[ -e ${d} ]] && continue
-        pushd ${d/%configure/.} >/dev/null || die
-        AT_NOELIBTOOLIZE="yes" AT_TOPLEVEL_EAUTORECONF="yes" \
-        multijob_child_init eautoreconf
-        popd >/dev/null
-    done
-    multijob_finish
-    elibtoolize
+		[[ -e ${d} ]] && continue
+		pushd ${d/%configure/.} >/dev/null || die
+		AT_NOELIBTOOLIZE="yes" AT_TOPLEVEL_EAUTORECONF="yes" \
+		multijob_child_init eautoreconf
+		popd >/dev/null
+	done
+	multijob_finish
+	elibtoolize
 
 	# Disable internal func checks as our USE/DEPEND
 	# stuff handles this just fine already #408395
@@ -211,7 +212,7 @@ src_configure() {
 	# No configure flage for this #403561
 	export ac_cv_lib_bluetooth_hci_devid=$(usex bluetooth)
 	# Requiring java is asine #434662
-    export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
+	export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
@@ -264,36 +265,36 @@ src_install() {
 	domenu tools/Linux/xbmc.desktop
 	newicon tools/Linux/xbmc-48x48.png xbmc.png
 
-    # Remove optional addons (platform specific and disabled by use flag)
-    local disabled_addons=(
-        repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
-        visualization.dxspectrum
-    )
-    use fishbmc || disabled_addons+=( visualization.fishbmc )
-    use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
-    use rsxs || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
-    rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
+	# Remove optional addons (platform specific and disabled by USE flag).
+	local disabled_addons=(
+		repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
+		visualization.dxspectrum
+	)
+	use fishbmc  || disabled_addons+=( visualization.fishbmc )
+	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
+	use rsxs     || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
+	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
 
-    # Punt simplejson bundle, we use the system one anyway
-    rm -rf "${ED}"/usr/share/xbmc/addons/script.module.simplejson/lib
-    # Remove fonconfig settings that are used only on MacOSX.
-    # Can't be patched upstream because they just find all files and install
-    # them into same structure like they have in git.
-    rm -rf "${ED}"/usr/share/xbmc/system/players/dvdplayer/etc
+	# Punt simplejson bundle, we use the system one anyway.
+	rm -rf "${ED}"/usr/share/xbmc/addons/script.module.simplejson/lib
+	# Remove fonconfig settings that are used only on MacOSX.
+	# Can't be patched upstream because they just find all files and install
+	# them into same structure like they have in git.
+	rm -rf "${ED}"/usr/share/xbmc/system/players/dvdplayer/etc
 
 	# Replace bundled fonts with system ones
-    # teletext.ttf: unknown
-    # bold-caps.ttf: unknown
-    # roboto: roboto-bold, roboto-regular
-    # arial.ttf: font mashed from droid/roboto, not removed wrt bug#460514
+	# teletext.ttf: unknown
+	# bold-caps.ttf: unknown
+	# roboto: roboto-bold, roboto-regular
+	# arial.ttf: font mashed from droid/roboto, not removed wrt bug#460514
 	rm -rf "${ED}"/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-*
-    dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
-        /usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Regular.ttf
-    dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
-        /usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
+	dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
+		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Regular.ttf
+	dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
+		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
-    python_newscript "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send
+	python_newscript "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send
 }
 
 pkg_postinst() {
