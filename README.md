@@ -1,8 +1,12 @@
 xbmc-overlay
 ============
+A Gentoo overlay which provides modified and unofficial ebuilds
+for a XBMC appliance/set-top-box/htpc.
 
-A Gentoo overlay with some modified and unofficial ebuilds
-
+ToDo
+====
+- Add an ebuild for a patched («quietboot») version of syslinux
+- Add an ebuild for XBMC fbsplash themes in media-gfx/
 
 Links
 =====
