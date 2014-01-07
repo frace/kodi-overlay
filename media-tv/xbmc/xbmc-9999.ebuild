@@ -138,6 +138,9 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )"
+# Force java for latest git version to avoid having to hand maintain the
+# generated addons package. #488118
+[[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
 
 S=${WORKDIR}/${MY_P}
 
