@@ -5,6 +5,8 @@ for a XBMC appliance/set-top-box/htpc.
 
 Available ebuilds
 =================
+
+<pre>
 .xbmc-overlay
 |
 +-- app-admin
@@ -24,6 +26,7 @@ Available ebuilds
 +── sys-apps
     +-- qingy
         +-- qingy-1.0.0.ebuild
+</pre>
 
 ToDo
 ====
