@@ -8,10 +8,10 @@ Get it!
 There are two easy ways to get the overlay onto your Gentoo installation:
 
 ### 1. Git
-1. `mkdir /usr/local/portage`
-2. `cd /usr/local/portage`
-3. `git clone git://github.com/frace/xbmc-overlay.git`
-4. Modify `/etc/make.conf`:
+0. `mkdir /usr/local/portage`
+1. `cd /usr/local/portage`
+2. `git clone git://github.com/frace/xbmc-overlay.git`
+3. Modify `/etc/make.conf`:
 
   <pre>
   PORTDIR_OVERLAY="/usr/local/portage/xbmc-overlay/"
@@ -21,6 +21,7 @@ There are two easy ways to get the overlay onto your Gentoo installation:
 If you don't know what `layman` is then please read the [documentation][docs-layman] first.
 
 
+0. `emerge -av layman`
 1. Modify `/etc/layman/layman.cfg`:
 
   <pre>
