@@ -18,7 +18,7 @@ There are two easy ways to get the overlay onto your Gentoo installation:
   PORTDIR_OVERLAY="/usr/local/portage/xbmc-overlay/"
   </pre>
 
-### 2. Layman users
+### 2. Layman
 If you don't know what `layman` is then please read the [documentation][docs-layman] first.
 
 
