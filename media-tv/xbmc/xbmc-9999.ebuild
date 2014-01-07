@@ -215,7 +215,7 @@ src_configure() {
 	# No configure flage for this #403561
 	export ac_cv_lib_bluetooth_hci_devid=$(usex bluetooth)
 	# Requiring java is asine #434662
-	export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
+	export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
