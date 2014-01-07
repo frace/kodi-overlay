@@ -7,7 +7,6 @@
     <homepage>https://github.com/frace/xbmc-overlay</homepage>
     <owner type="person">
       <email>N/A</email>
-      <contact><![CDATA[https://github.com/frace]]></contact>
       <name><![CDATA[frace]]></name>
     </owner>
     <source type="git">git://github.com/frace/xbmc-overlay.git</source>
