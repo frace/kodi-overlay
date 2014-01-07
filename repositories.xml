@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[xbmc-overlay]]></name>
+    <description lang="en"><![CDATA[A Gentoo overlay which provides modified and unofficial ebuilds for a XBMC appliance/set-top-box/htpc.]]></description>
+    <homepage>https://github.com/frace/xbmc-overlay</homepage>
+    <owner type="person">
+      <email></email>
+      <contact>https://github.com/frace</contact>
+      <name><![CDATA[frace]]></name>
+    </owner>
+    <source type="git">git://github.com/frace/xbmc-overlay.git</source>
+    <feed>https://github.com/frace/xbmc-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
