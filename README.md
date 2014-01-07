@@ -1,9 +1,9 @@
-xbmc-overlay
+What is it?
 ============
 A Gentoo overlay which provides modified and unofficial ebuilds
 for a XBMC appliance/set-top-box/htpc.
 
-Get it
+Get it!
 ------
 There are two easy ways to get the overlay onto your Gentoo installation:
 
