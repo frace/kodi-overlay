@@ -49,9 +49,9 @@ Available ebuilds
 
 Bugs
 ----
-You are welcome to report bugs at the [project bugtracker][bugtracker] at github.com.
+You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
 
-[bugtracker]: https://github.com/frace/xbmc-overlay/issues
+[project-bugtracker]: https://github.com/frace/xbmc-overlay/issues
 
 ToDo
 -----
@@ -67,7 +67,9 @@ Links
 - [Gentoo dev manual][docs-devmanual]
 - [Ebuild writing][docs-devmanual-ebuild]
 - [Ebuild file format][docs-devmanual-ebuild-format]
+- [Gentoo color palette][docs-gentoo-colors]
 
-[docs-devmanual]: http://devmanual.gentoo.org/
-[docs-devmanual-ebuild]: http://devmanual.gentoo.org/ebuild-writing/
-[docs-devmanual-ebuild-format]: http://devmanual.gentoo.org/ebuild-writing/file-format/
+[docs-devmanual]: https://devmanual.gentoo.org
+[docs-devmanual-ebuild]: https://devmanual.gentoo.org/ebuild-writing
+[docs-devmanual-ebuild-format]: https://devmanual.gentoo.org/ebuild-writing/file-format
+[docs-gentoo-colors]: https://www.gentoo.org/proj/en/desktop/artwork/colors.xml
