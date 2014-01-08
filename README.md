@@ -30,8 +30,8 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
               https://raw.github.com/frace/xbmc-overlay/master/repositories.xml
   </pre>
 
-3. Run `layman --list`
-4. Run `layman --add xbmc-overlay`
+3. `layman --list`
+4. `layman --add xbmc-overlay`
 
 [docs-layman]: http://www.gentoo.org/proj/en/overlays/userguide.xml
 
