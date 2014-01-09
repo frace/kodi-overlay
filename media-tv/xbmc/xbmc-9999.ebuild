@@ -13,7 +13,7 @@ case ${PV} in
 	# EGIT_REPO_URI="git://github.com/gnif/xbmc.git"
 	# EGIT_BRANCH="ae_rebase"
 	inherit git-2
-	SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
+	#SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
 	;;
 *_alpha*|*_beta*|*_rc*)
 	MY_PV="Frodo_${PV#*_}"
@@ -138,7 +138,11 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )
-	ccache? ( dev-util/ccache )"
+	ccache? ( dev-util/ccache )
+	java? ( virtual/jre )"
+# Force java for latest git version to avoid having to hand maintain the
+# generated addons package. #488118
+[[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
 
 S=${WORKDIR}/${MY_P}
 
@@ -213,7 +217,7 @@ src_configure() {
 	# No configure flage for this #403561
 	export ac_cv_lib_bluetooth_hci_devid=$(usex bluetooth)
 	# Requiring java is asine #434662
-	export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
+	export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
