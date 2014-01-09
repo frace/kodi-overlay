@@ -34,7 +34,7 @@ HOMEPAGE="http://xbmc.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql neon nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="afp airplay alsa altivec avahi bluetooth bluray caps ccache cec css debug +fishbmc gles goom java joystick midi mysql neon nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -137,7 +137,8 @@ DEPEND="${COMMON_DEPEND}
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
-	java? ( virtual/jre )"
+	java? ( virtual/jre )
+	ccache? ( dev-util/ccache )"
 
 S=${WORKDIR}/${MY_P}
 
@@ -216,7 +217,7 @@ src_configure() {
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
-		--enable-ccache \
+		$(use_enable ccache) \
 		--disable-optimizations \
 		--enable-external-libraries \
 		$(has_version 'media-video/libav' && echo "--enable-libav-compat") \
