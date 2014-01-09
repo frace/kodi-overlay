@@ -58,7 +58,7 @@ ToDo
 - Add an ebuild for a patched («quietboot») version of syslinux
 - Add an ebuild for XBMC fbsplash themes in media-gfx/
 
-Presumably a more recent list of todos can be found on the [project todo list][project-todo].
+Presumably a more recent list of todos can be found on the [project todo list][project-todo] at github.com.
 
 [project-todo]: https://github.com/frace/xbmc-overlay/issues?labels=todo
 
