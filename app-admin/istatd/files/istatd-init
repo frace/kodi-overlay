@@ -3,12 +3,20 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-PID=/var/run/istatd/istat.pid
+PID="/run/istatd/istat.pid"
 
 checkTmp() {
-    if ! [ -d "/var/{run,cache}/istat" ]; then
-        mkdir -p /var/{run,cache}/istatd
-        chown istatd:istatd /var/{run,cache}/istatd
+    cache_dir="/var/cache/istat"
+    run_dir="/run/istatd"
+
+    if [ ! -d "${cache_dir}" ]; then
+        mkdir -p "${cache_dir}"
+        chown istatd:istatd "${cache_dir}"
+    fi
+
+    if [ ! -d "${run_dir}" ]; then
+        mkdir -p "${run_dir}"
+        chown istatd:istatd "${run_dir}"
     fi
 }
 

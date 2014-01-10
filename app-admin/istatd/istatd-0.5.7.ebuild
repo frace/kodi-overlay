@@ -1,9 +1,9 @@
-EAPI=2
+EAPI=5
 inherit user
 
 DESCRIPTION="Monitoring daemon serving statistics to your iStat iPhone application"
-HOMEPAGE="http://bjango.com/apps/istat/"
-SRC_URI="http://github.com/downloads/tiwilliam/${PN}/${P}.tar.gz"
+HOMEPAGE="https://github.com/tiwilliam/istatd"
+SRC_URI="mirror://github/tiwilliam/istatd/istatd-0.5.7.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -25,8 +25,11 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install || die "Install failed"
 
-	dodir /var/{run,cache}/${PN} || die
-	fowners istatd:istatd /var/{run,cache}/${PN} || die
+	dodir /var/cache/${PN} || die
+	dodir /run/${PN} || die
+
+	fowners istatd:istatd /var/cache/${PN} || die
+	fowners istatd:istatd /run/${PN} || die
 
 	newinitd "${FILESDIR}/istatd-init" ${PN} || die
 	newconfd "${FILESDIR}/istatd-conf" ${PN} || die
