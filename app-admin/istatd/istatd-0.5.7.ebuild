@@ -1,4 +1,4 @@
-EAPI=5
+EAPI="5"
 inherit user
 
 DESCRIPTION="Monitoring daemon serving statistics to your iStat iPhone application"
