@@ -1,4 +1,4 @@
-EAPI="4"
+EAPI="5"
 
 inherit autotools eutils
 
@@ -44,7 +44,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/08-${P}-fix-errno.patch
 		epatch "${FILESDIR}"/09-${P}-fix-stat.patch
 		epatch "${FILESDIR}"/10-${P}-fix-even-more-pointers.patch
-		mv ${S}/${P}/lib/identify.c ${S}/lib || die
+		mv "${S}/${P}/lib/identify.c" "${S}/lib" || die
 	fi
 	eautoreconf
 }
