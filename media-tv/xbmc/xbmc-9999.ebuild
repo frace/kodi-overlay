@@ -219,7 +219,7 @@ src_configure() {
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
-		--enable-ccache \
+		--disable-ccache \
 		--disable-optimizations \
 		--enable-external-libraries \
 		$(has_version 'media-video/libav' && echo "--enable-libav-compat") \
