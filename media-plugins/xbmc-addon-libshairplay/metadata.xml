@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>xbox</herd>
+<herd></herd>
 <use>
  <flag name='static-libs'>Build static versions of dynamic libraries as well</flag>
 </use>
