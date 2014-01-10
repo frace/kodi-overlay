@@ -3,7 +3,7 @@ inherit user
 
 DESCRIPTION="Monitoring daemon serving statistics to your iStat iPhone application"
 HOMEPAGE="https://github.com/tiwilliam/istatd"
-SRC_URI="mirror://github/tiwilliam/istatd/istatd-0.5.7.tar.gz"
+SRC_URI="mirror://github/tiwilliam/istatd/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
