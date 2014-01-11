@@ -61,6 +61,8 @@ Presumably a more recent list of todos can be found on the [project todo list][p
 
 Links
 -----
+- [Portage man pages][docs-gentoo-portage]
+- [make.conf man pages][docs-gentoo-makeconf]
 - [Gentoo dev manual][docs-devmanual]
 - [Ebuild writing][docs-devmanual-ebuild]
 - [Ebuild file format][docs-devmanual-ebuild-format]
@@ -70,3 +72,5 @@ Links
 [docs-devmanual-ebuild]: https://devmanual.gentoo.org/ebuild-writing
 [docs-devmanual-ebuild-format]: https://devmanual.gentoo.org/ebuild-writing/file-format
 [docs-gentoo-colors]: https://www.gentoo.org/proj/en/desktop/artwork/colors.xml
+[docs-gentoo-portage]: http://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html
+[docs-gentoo-makeconf]: http://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
