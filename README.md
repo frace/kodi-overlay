@@ -58,9 +58,7 @@ Presumably a more recent list of todos can be found on the [project todo list][p
 
 [project-todo]: https://github.com/frace/xbmc-overlay/issues?labels=todo
 
-
-Links
------
+* * *
 - [Portage man pages][docs-gentoo-portage]
 - [make.conf man pages][docs-gentoo-makeconf]
 - [Gentoo dev manual][docs-devmanual]
