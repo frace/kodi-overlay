@@ -39,7 +39,6 @@ Available ebuilds
         media-plugins/xbmc-addon-libshairport-1.2.0.20310_pre20130221.ebuild
         media-tv/xbmc-9999.ebuild
         net-fs/afpfs-ng-0.8.1.ebuild
-        sys-apps/qingy-1.0.0.ebuild
 
 
 Bugs
