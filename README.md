@@ -32,8 +32,7 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 [docs-layman]: http://www.gentoo.org/proj/en/overlays/userguide.xml
 
 
-Available ebuilds
------------------
+## Available ebuilds
         app-admin/istatd-0.5.7.ebuild
         media-plugins/xbmc-addon-libshairplay-1.0_pre20130416.ebuild
         media-plugins/xbmc-addon-libshairport-1.2.0.20310_pre20130221.ebuild
@@ -41,15 +40,13 @@ Available ebuilds
         net-fs/afpfs-ng-0.8.1.ebuild
 
 
-Bugs
-----
+## Bugs
 You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
 
 [project-bugtracker]: https://github.com/frace/xbmc-overlay/issues
 
 
-ToDo
------
+## ToDo
 - Add an ebuild for a patched («quietboot») version of syslinux
 - Add an ebuild for XBMC fbsplash themes in media-gfx/
 
