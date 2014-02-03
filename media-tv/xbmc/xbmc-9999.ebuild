@@ -10,10 +10,7 @@ inherit eutils python-single-r1 multiprocessing autotools
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
-	# EGIT_REPO_URI="git://github.com/gnif/xbmc.git"
-	# EGIT_BRANCH="ae_rebase"
 	inherit git-2
-	#SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
 	;;
 *_alpha*|*_beta*|*_rc*)
 	MY_PV="Frodo_${PV#*_}"
