@@ -92,7 +92,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	|| ( >=media-video/ffmpeg-1.2.1:0=[encode] ( media-libs/libpostproc >=media-video/libav-10_alpha:=[encode] ) )
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	afp? ( net-fs/afpfs-ng )
@@ -115,8 +114,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	gles? ( virtual/opengl )
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
-		|| ( x11-libs/libvdpau >=x11-drivers/nvidia-drivers-180.51 )
-		|| ( >=media-video/ffmpeg-1.2.1:0=[vdpau] >=media-video/libav-10_alpha:=[vdpau] )
+		x11-libs/libvdpau 
+		>=x11-drivers/nvidia-drivers-180.51
 	)
 	X? (
 		x11-apps/xdpyinfo
@@ -146,13 +145,6 @@ S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
 	python-single-r1_pkg_setup
-
-	if has_version 'media-video/libav' ; then
-		ewarn "Building ${PN} against media-video/libav is not supported upstream."
-		ewarn "It requires building a (small) wrapper library with some code"
-		ewarn "from media-video/ffmpeg."
-		ewarn "If you experience issues, please try with media-video/ffmpeg."
-	fi
 }
 
 src_unpack() {
@@ -221,9 +213,6 @@ src_configure() {
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
-		--enable-external-libraries \
-		$(has_version 'media-video/libav' && echo "--enable-libav-compat") \
-		--disable-external-ffmpeg \
 		--enable-gl \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
