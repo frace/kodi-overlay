@@ -33,11 +33,12 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 
 
 ## Available ebuilds
-        app-admin/istatd-0.5.7.ebuild
-        media-plugins/xbmc-addon-libshairplay-1.0_pre20130416.ebuild
-        media-plugins/xbmc-addon-libshairport-1.2.0.20310_pre20130221.ebuild
-        media-tv/xbmc-9999.ebuild
-        net-fs/afpfs-ng-0.8.1.ebuild
+        app-admin/istatd-0.5.7 [masked]
+        media-plugins/xbmc-addon-libshairplay-1.0_pre20130416
+        media-plugins/xbmc-addon-libshairport-1.2.0.20310_pre20130221
+        media-tv/xbmc-9999
+        net-fs/afpfs-ng-0.8.1 [masked]
+        sys-power/upower-0.9.23
 
 
 ## Bugs
