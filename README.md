@@ -40,6 +40,8 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
         [M] net-fs/afpfs-ng-0.8.1
             sys-power/upower-0.9.23
 
+Masked [M] ebuilds are unmaintained and are not in sync with possible upstream ebuilds.
+
 
 ## Bugs
 You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
