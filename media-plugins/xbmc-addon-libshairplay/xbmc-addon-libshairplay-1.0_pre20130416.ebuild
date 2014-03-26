@@ -26,6 +26,9 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}"/01-${PN}-1.0-fixipv4ipv6race.patch
+	epatch "${FILESDIR}"/02-${PN}-1.0-fixpasswordauthitunes.patch
+
 	eautoreconf
 }
 
