@@ -206,6 +206,8 @@ src_configure() {
 	# Requiring java is asine #434662
 	export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
 
+	${S}/bootstrap
+
 	econf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
