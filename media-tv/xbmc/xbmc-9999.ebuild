@@ -253,7 +253,7 @@ src_install() {
 	rm "${ED}"/usr/share/doc/*/{LICENSE.GPL,copying.txt}*
 
 	domenu tools/Linux/xbmc.desktop
-	newicon tools/Linux/xbmc-48x48.png xbmc.png
+	newicon media/icon48x48.png xbmc.png
 
 	# Remove optional addons (platform specific and disabled by USE flag).
 	local disabled_addons=(
