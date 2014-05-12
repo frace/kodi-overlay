@@ -168,6 +168,8 @@ src_prepare() {
 	multijob_finish
 	elibtoolize
 
+	[[ ${PV} == "9999" ]] && emake -f codegenerator.mk
+
 	# Disable internal func checks as our USE/DEPEND
 	# stuff handles this just fine already #408395
 	export ac_cv_lib_avcodec_ff_vdpau_vc1_decode_picture=yes
@@ -205,8 +207,6 @@ src_configure() {
 	export ac_cv_lib_bluetooth_hci_devid=$(usex bluetooth)
 	# Requiring java is asine #434662
 	export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
-
-	${S}/bootstrap
 
 	econf \
 		--docdir=/usr/share/doc/${PF} \
