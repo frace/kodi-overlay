@@ -26,8 +26,8 @@ case ${PV} in
 	;;
 esac
 
-DESCRIPTION="XBMC is a free and open source media-player and entertainment hub"
-HOMEPAGE="http://xbmc.org/"
+DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
+HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -111,7 +111,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	gles? ( virtual/opengl )
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
-		x11-libs/libvdpau 
+		x11-libs/libvdpau
 		>=x11-drivers/nvidia-drivers-180.51
 	)
 	X? (
@@ -286,7 +286,7 @@ src_install() {
 		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
-	python_newscript "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send
+	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
 }
 
 pkg_postinst() {
