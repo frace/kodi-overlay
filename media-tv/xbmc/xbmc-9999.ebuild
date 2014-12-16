@@ -124,7 +124,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 RDEPEND="${COMMON_DEPEND}
 	udev? (
 		udisks? ( sys-fs/udisks:0 )
-		upower? ( sys-power/upower )
+		upower? ( sys-power/upower-pm-utils )
 	)"
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
@@ -284,7 +284,6 @@ src_install() {
 		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
-	python_newscript "tools/EventClients/Clients/XBMC Send/xbmc-send.py" xbmc-send
 }
 
 pkg_postinst() {
