@@ -190,7 +190,7 @@ src_prepare() {
 	# avoid long delays when powerkit isn't running #348580
 	sed -i \
 		-e '/dbus_connection_send_with_reply_and_block/s:-1:3000:' \
-		xbmc/linux/*.cpp || die
+		src/linux/*.cpp || die
 
 	epatch_user #293109
 
