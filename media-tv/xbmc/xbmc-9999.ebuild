@@ -224,7 +224,6 @@ src_configure() {
 		$(use_enable fishbmc) \
 		$(use_enable gles) \
 		$(use_enable goom) \
-		--disable-hal \
 		$(use_enable joystick) \
 		$(use_enable midi mid) \
 		$(use_enable mysql) \
