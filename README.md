@@ -47,14 +47,6 @@ You are welcome to report bugs at the [project bugtracker][project-bugtracker] a
 [project-bugtracker]: https://github.com/frace/kodi-overlay/issues
 
 
-## ToDo
-- Add an ebuild for a patched («quietboot») version of syslinux
-- Add an ebuild for XBMC/KODI fbsplash themes in media-gfx/
-
-Presumably a more recent list of todos can be found on the [project todo list][project-todo] at github.com.
-
-[project-todo]: https://github.com/frace/kodi-overlay/issues?labels=todo
-
 * * *
 - [Portage man pages][docs-gentoo-portage]
 - [make.conf man pages][docs-gentoo-makeconf]
