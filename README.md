@@ -1,6 +1,6 @@
 # What is it?
 A Gentoo overlay which provides modified and unofficial ebuilds
-for a XBMC appliance/set-top-box/htpc.
+for a KODI appliance/set-top-box/htpc.
 
 
 ## Get it!
@@ -11,10 +11,10 @@ There are two easy ways to get the overlay onto your Gentoo installation:
 1. `emerge -av git`
 2. `mkdir /usr/local/portage`
 3. `cd /usr/local/portage`
-4. `git clone git://github.com/frace/xbmc-overlay.git`
+4. `git clone git://github.com/frace/kodi-overlay.git`
 5. Modify `/etc/make.conf`:
 
-        PORTDIR_OVERLAY="/usr/local/portage/xbmc-overlay/"
+        PORTDIR_OVERLAY="/usr/local/portage/kodi-overlay/"
 
 
 ### 2. Layman
@@ -27,7 +27,7 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
                     https://raw.github.com/frace/xbmc-overlay/master/repositories.xml
 
 3. `layman --list`
-4. `layman --add xbmc-overlay`
+4. `layman --add kodi-overlay`
 
 [docs-layman]: http://www.gentoo.org/proj/en/overlays/userguide.xml
 
@@ -44,7 +44,7 @@ Masked [M] ebuilds are unmaintained and are not in sync with possible upstream e
 ## Bugs
 You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
 
-[project-bugtracker]: https://github.com/frace/xbmc-overlay/issues
+[project-bugtracker]: https://github.com/frace/kodi-overlay/issues
 
 
 ## ToDo
