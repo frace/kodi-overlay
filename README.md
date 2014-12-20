@@ -36,7 +36,6 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
         [M] app-admin/istatd-0.5.7
             media-plugins/kodi-addon-libshairplay-1.0_pre20130416
             media-tv/xbmc-9999
-        [M] net-fs/afpfs-ng-0.8.1
 
 Masked [M] ebuilds are unmaintained and are not in sync with possible upstream ebuilds.
 
