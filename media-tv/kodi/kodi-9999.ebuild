@@ -21,13 +21,13 @@ case ${PV} in
 	;;
 *)
 	MY_P=${P/_/-*_}
-	SRC_URI="http://mirrors.xbmc.org/releases/source/${MY_P}.tar.gz"
+	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 	;;
 esac
 
-DESCRIPTION="XBMC is a free and open source media-player and entertainment hub"
-HOMEPAGE="http://xbmc.org/"
+DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
+HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -111,7 +111,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	gles? ( virtual/opengl )
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
-		x11-libs/libvdpau 
+		x11-libs/libvdpau
 		>=x11-drivers/nvidia-drivers-180.51
 	)
 	X? (
@@ -253,8 +253,8 @@ src_install() {
 	default
 	rm "${ED}"/usr/share/doc/*/{LICENSE.GPL,copying.txt}*
 
-	domenu tools/Linux/xbmc.desktop
-	newicon media/icon48x48.png xbmc.png
+	domenu tools/Linux/kodi.desktop
+	newicon media/icon48x48.png kodi.png
 
 	# Remove optional addons (platform specific and disabled by USE flag).
 	local disabled_addons=(
@@ -285,8 +285,9 @@ src_install() {
 		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
+	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
 }
 
 pkg_postinst() {
-	elog "Visit http://wiki.xbmc.org/?title=XBMC_Online_Manual"
+	elog "Visit http://kodi.wiki/"
 }
