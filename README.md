@@ -37,7 +37,6 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
             media-plugins/xbmc-addon-libshairplay-1.0_pre20130416
             media-tv/xbmc-9999
         [M] net-fs/afpfs-ng-0.8.1
-            sys-power/upower-0.9.23
 
 Masked [M] ebuilds are unmaintained and are not in sync with possible upstream ebuilds.
 
