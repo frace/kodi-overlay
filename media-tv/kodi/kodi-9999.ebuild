@@ -46,7 +46,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? (
 		app-pda/libplist
-		media-plugins/xbmc-addon-libshairplay
+		media-plugins/kodi-addon-libshairplay
 	)
 	dev-libs/boost
 	dev-libs/fribidi
@@ -124,7 +124,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 RDEPEND="${COMMON_DEPEND}
 	udev? (
 		udisks? ( sys-fs/udisks:0 )
-		upower? ( sys-power/upower )
+		upower? ( sys-power/upower-pm-utils )
 	)"
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
@@ -224,7 +224,6 @@ src_configure() {
 		$(use_enable fishbmc) \
 		$(use_enable gles) \
 		$(use_enable goom) \
-		--disable-hal \
 		$(use_enable joystick) \
 		$(use_enable midi mid) \
 		$(use_enable mysql) \
@@ -265,25 +264,25 @@ src_install() {
 	use fishbmc  || disabled_addons+=( visualization.fishbmc )
 	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
 	use rsxs     || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
-	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/xbmc/addons/}"
+	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/kodi/addons/}"
 
 	# Punt simplejson bundle, we use the system one anyway.
-	rm -rf "${ED}"/usr/share/xbmc/addons/script.module.simplejson/lib
+	rm -rf "${ED}"/usr/share/kodi/addons/script.module.simplejson/lib
 	# Remove fonconfig settings that are used only on MacOSX.
 	# Can't be patched upstream because they just find all files and install
 	# them into same structure like they have in git.
-	rm -rf "${ED}"/usr/share/xbmc/system/players/dvdplayer/etc
+	rm -rf "${ED}"/usr/share/kodi/system/players/dvdplayer/etc
 
 	# Replace bundled fonts with system ones
 	# teletext.ttf: unknown
 	# bold-caps.ttf: unknown
 	# roboto: roboto-bold, roboto-regular
 	# arial.ttf: font mashed from droid/roboto, not removed wrt bug#460514
-	rm -rf "${ED}"/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-*
+	rm -rf "${ED}"/usr/share/kodi/addons/skin.confluence/fonts/Roboto-*
 	dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
-		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Regular.ttf
+		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Regular.ttf
 	dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
-		/usr/share/xbmc/addons/skin.confluence/fonts/Roboto-Bold.ttf
+		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Bold.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
