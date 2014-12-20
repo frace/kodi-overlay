@@ -46,7 +46,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? (
 		app-pda/libplist
-		media-plugins/xbmc-addon-libshairplay
+		media-plugins/kodi-addon-libshairplay
 	)
 	dev-libs/boost
 	dev-libs/fribidi
