@@ -31,7 +31,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp test udev upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp test upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -122,10 +122,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrender
 	)"
 RDEPEND="${COMMON_DEPEND}
-	udev? (
-		udisks? ( sys-fs/udisks:0 )
-		upower? ( sys-power/upower-pm-utils )
-	)"
+	udisks? ( sys-fs/udisks:0 )
+	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )"
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
@@ -240,7 +238,6 @@ src_configure() {
 		$(use_enable sftp ssh) \
 		$(use_enable test gtest) \
 		$(use_enable usb libusb) \
-		$(use_enable udev) \
 		$(use_enable upnp) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \
