@@ -112,7 +112,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
 		x11-libs/libvdpau
-		>=x11-drivers/nvidia-drivers-180.51
 	)
 	X? (
 		x11-apps/xdpyinfo
