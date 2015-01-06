@@ -113,6 +113,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	vdpau? (
 		x11-libs/libvdpau
 	)
+	net-libs/gnutls
 	X? (
 		x11-apps/xdpyinfo
 		x11-apps/mesa-progs
