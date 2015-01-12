@@ -15,6 +15,7 @@ HOMEPAGE="https://github.com/juhovh/shairplay"
 LICENSE="LGPL-2.1 MIT BSD"
 SLOT="0"
 IUSE="static-libs"
+KEYWORDS="~amd64 ~x86"
 
 COMMON_DEPEND=">=dev-libs/openssl-1.0.0
 				media-libs/libao"
