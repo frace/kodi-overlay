@@ -108,6 +108,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	avahi? ( net-dns/avahi )
 	afp? ( net-fs/afpfs-ng )
 	nfs? ( net-fs/libnfs )
+	net-libs/gnutls
 	webserver? ( net-libs/libmicrohttpd[messages] )
 	sftp? ( net-libs/libssh[sftp] )
 	net-misc/curl
