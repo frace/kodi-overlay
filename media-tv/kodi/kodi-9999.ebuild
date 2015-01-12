@@ -188,14 +188,14 @@ src_prepare() {
 	# stuff handles this just fine already #408395
 	export ac_cv_lib_avcodec_ff_vdpau_vc1_decode_picture=yes
 
-	local squish #290564
-	use altivec && squish="-DSQUISH_USE_ALTIVEC=1 -maltivec"
-	use sse && squish="-DSQUISH_USE_SSE=1 -msse"
-	use sse2 && squish="-DSQUISH_USE_SSE=2 -msse2"
-	sed -i \
-		-e '/^CXXFLAGS/{s:-D[^=]*=.::;s:-m[[:alnum:]]*::}' \
-		-e "1iCXXFLAGS += ${squish}" \
-		lib/libsquish/Makefile.in || die
+	#local squish #290564
+	#use altivec && squish="-DSQUISH_USE_ALTIVEC=1 -maltivec"
+	#use sse && squish="-DSQUISH_USE_SSE=1 -msse"
+	#use sse2 && squish="-DSQUISH_USE_SSE=2 -msse2"
+	#sed -i \
+	#	-e '/^CXXFLAGS/{s:-D[^=]*=.::;s:-m[[:alnum:]]*::}' \
+	#	-e "1iCXXFLAGS += ${squish}" \
+	#	lib/libsquish/Makefile.in || die
 
 	# Fix XBMC's final version string showing as "exported"
 	# instead of the SVN revision number.
