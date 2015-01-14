@@ -254,6 +254,7 @@ src_install() {
 	local disabled_addons=(
 		repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
 		visualization.dxspectrum
+		visualization.vortex
 	)
 	use fishbmc  || disabled_addons+=( visualization.fishbmc )
 	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
