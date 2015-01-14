@@ -68,5 +68,12 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 [docs-gentoo-portage]: http://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html
 [docs-gentoo-makeconf]: http://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
 
+### KODI docs
+- [KODI@Gentoo Linux Wiki][docs-gentoo-wiki]
+- [KODI Wiki Manual][docs-kodi-wiki]
+
+[docs-gentoo-wiki]: http://wiki.gentoo.org/wiki/Kodi
+[docs-kodi-wiki]: http://kodi.wiki
+
 [external-gentoo]: http://www.gentoo.org
 [external-kodi]: http://kodi.tv
