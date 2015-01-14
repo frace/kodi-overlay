@@ -3,7 +3,7 @@
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
     <name><![CDATA[kodi-overlay]]></name>
-    <description lang="en"><![CDATA[A Gentoo overlay which provides modified and unofficial ebuilds for a KODI appliance/set-top-box/htpc.]]></description>
+    <description lang="en"><![CDATA[Unofficial portage overlay for Gentoo Linux providing modified and unofficial ebuilds for a KODI appliance.]]></description>
     <homepage>https://github.com/frace/kodi-overlay</homepage>
     <owner type="person">
       <email>N/A</email>
