@@ -1,6 +1,6 @@
-# What is it?
-A [Gentoo][external-gentoo] overlay which provides modified and unofficial ebuilds
-for a [KODI][external-kodi] appliance/set-top-box/htpc.
+# What is kodi-overlay?
+kodi-overlay is a [Gentoo Linux][external-gentoo] overlay which provides modified
+and unofficial ebuilds for a [KODI][external-kodi] appliance/set-top-box/htpc.
 
 
 ## Get it!
