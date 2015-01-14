@@ -43,10 +43,11 @@ Masked [M] ebuilds are unmaintained and are not in sync with possible upstream e
 ## Bugs
 You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
 If you create a pull request then please make sure to report the issue also at the official
-Gentoo bug tracker and reference it here since we want to stay in sync as much as possible
+[Gentoo bug tracker][gentoo-bugtracker] and reference it here since we want to stay in sync as much as possible
 with the official ebuild.
 
 [project-bugtracker]: https://github.com/frace/kodi-overlay/issues
+[gentoo-bugtracker]: https://bugs.gentoo.org/
 
 
 * * *
