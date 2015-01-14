@@ -46,7 +46,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba sse sse2 sftp test upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="afp airplay altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sse sse2 sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -231,11 +231,13 @@ src_configure() {
 		$(use_enable rtmp) \
 		$(use_enable samba) \
 		$(use_enable sftp ssh) \
+		$(use_enable spectrum) \
 		$(use_enable test gtest) \
 		$(use_enable usb libusb) \
 		$(use_enable upnp) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \
+		$(use_enable waveform) \
 		$(use_enable webserver) \
 		$(use_enable X x11) \
 		$(use_enable xrandr)
@@ -256,6 +258,8 @@ src_install() {
 	use fishbmc  || disabled_addons+=( visualization.fishbmc )
 	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
 	use rsxs     || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
+	use spectrum || disabled_addons+=( visualization.glspectrum )
+	use waveform || disabled_addons+=( visualization.waveform )
 	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/kodi/addons/}"
 
 	# Punt simplejson bundle, we use the system one anyway.
