@@ -125,10 +125,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	)
 	gles? ( virtual/opengl )
 	vaapi? ( x11-libs/libva[opengl] )
-	vdpau? (
-		x11-libs/libvdpau
-		>=x11-drivers/nvidia-drivers-180.51
-	)
+	vdpau? ( x11-libs/libvdpau )
 	X? (
 		x11-apps/xdpyinfo
 		x11-apps/mesa-progs
