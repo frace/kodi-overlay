@@ -1,10 +1,10 @@
 # What is it?
-A Gentoo overlay which provides modified and unofficial ebuilds
-for a KODI appliance/set-top-box/htpc.
+A [Gentoo][external-gentoo] overlay which provides modified and unofficial ebuilds
+for a [KODI][external-kodi] appliance/set-top-box/htpc.
 
 
 ## Get it!
-There are two easy ways to get the overlay onto your Gentoo installation:
+There are two easy ways to get the overlay onto your system:
 
 
 ### 1. Git
@@ -42,17 +42,17 @@ Masked [M] ebuilds are unmaintained and are not in sync with possible upstream e
 
 ## Bugs
 You are welcome to report bugs at the [project bugtracker][project-bugtracker] at github.com.
-If you create a KODI related pull request then please make sure to report the issue also at
-the official [Gentoo bug tracker][gentoo-bugtracker] and reference it here since we want to
-stay in sync as much as possible with the official ebuild. Finally our goal is to improve the
-official KODI ebuild and to help to fix bugs.
+If you create a [KODI][external-kodi] related pull request then please make sure to report the
+issue also at the official [Gentoo Linux bug tracker][gentoo-bugtracker] and reference it here
+since we want to stay in sync as much as possible with the official ebuild. Finally our goal is
+to help to improve the official [KODI][external-kodi] ebuild and to help to fix bugs.
 
 [project-bugtracker]: https://github.com/frace/kodi-overlay/issues
 [gentoo-bugtracker]: https://bugs.gentoo.org/
 
 
 * * *
-## Gentoo docs
+### Gentoo docs
 - [Portage man pages][docs-gentoo-portage]
 - [make.conf man pages][docs-gentoo-makeconf]
 - [Gentoo dev manual][docs-devmanual]
@@ -66,3 +66,6 @@ official KODI ebuild and to help to fix bugs.
 [docs-gentoo-colors]: https://www.gentoo.org/proj/en/desktop/artwork/colors.xml
 [docs-gentoo-portage]: http://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html
 [docs-gentoo-makeconf]: http://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
+
+[external-gentoo]: http://www.gentoo.org
+[external-kodi]: http://kodi.tv
