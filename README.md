@@ -79,8 +79,8 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 * * *
 ### Credits
 - [Contributors][contrib-people]
-- [Gentoo-Linux][external-gentoo]
-- [KODI][external-kodi]
+- [Gentoo Linux][external-gentoo]
+- [KODI Media Player][external-kodi]
 
 [contrib-people]: https://github.com/frace/kodi-overlay/graphs/contributors
 
