@@ -82,7 +82,7 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 - [Gentoo-Linux][external-gentoo]
 - [KODI][external-kodi]
 
-[contrib-people][https://github.com/frace/kodi-overlay/graphs/contributors]
+[contrib-people]: https://github.com/frace/kodi-overlay/graphs/contributors
 
 
 [external-gentoo]: http://www.gentoo.org
