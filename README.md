@@ -75,6 +75,16 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 [docs-gentoo-wiki]: http://wiki.gentoo.org/wiki/Kodi
 [docs-kodi-wiki]: http://kodi.wiki
 
+
+* * *
+### Credits
+- [Contributors][contrib-people]
+- [Gentoo-Linux][external-gentoo]
+- [KODI][external-kodi]
+
+[contrib-people][https://github.com/frace/kodi-overlay/graphs/contributors]
+
+
 [external-gentoo]: http://www.gentoo.org
 [external-kodi]: http://kodi.tv
 [external-portage]: http://wiki.gentoo.org/wiki/Project:Portage
