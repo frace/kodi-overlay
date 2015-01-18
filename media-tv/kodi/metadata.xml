@@ -17,7 +17,6 @@
  <flag name='rsxs'>Enable really slick X screensavers</flag>
  <flag name='sftp'>Support browsing files over SFTP</flag>
  <flag name='spectrum'>Enable Spectrum visualisation</flag>
- <flag name='vaapi'>Enables VAAPI (Video Acceleration API) for hardware decoding</flag>
  <flag name='waveform'>Enable Waveform visualisation</flag>
  <flag name='webserver'>Enable internal webserver</flag>
  <flag name='xrandr'>Support X randr extension</flag>
