@@ -209,7 +209,6 @@ src_configure() {
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
-		--enable-gl \
 		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
 		$(use_enable avahi) \
