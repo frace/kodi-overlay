@@ -88,7 +88,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/libmpeg2
 	media-libs/libogg
 	media-libs/libpng
-	projectm? ( media-libs/libprojectm )
 	media-libs/libsamplerate
 	joystick? ( media-libs/libsdl2 )
 	>=media-libs/taglib-1.8
