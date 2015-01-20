@@ -250,17 +250,12 @@ src_install() {
 	domenu tools/Linux/kodi.desktop
 	newicon media/icon48x48.png kodi.png
 
-	# Remove optional addons (platform specific and disabled by USE flag).
+	# Remove optional addons (platform specific).
 	local disabled_addons=(
 		repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
 		visualization.dxspectrum
 		visualization.vortex
 	)
-	use fishbmc  || disabled_addons+=( visualization.fishbmc )
-	use projectm || disabled_addons+=( visualization.{milkdrop,projectm} )
-	use rsxs     || disabled_addons+=( screensaver.rsxs.{euphoria,plasma,solarwinds} )
-	use spectrum || disabled_addons+=( visualization.glspectrum )
-	use waveform || disabled_addons+=( visualization.waveform )
 	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/kodi/addons/}"
 
 	# Punt simplejson bundle, we use the system one anyway.
