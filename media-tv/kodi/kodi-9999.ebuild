@@ -46,7 +46,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="afp airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
