@@ -46,7 +46,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -97,7 +97,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-sound/wavpack
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
-	afp? ( net-fs/afpfs-ng )
 	nfs? ( net-fs/libnfs )
 	net-libs/gnutls
 	webserver? ( net-libs/libmicrohttpd[messages] )
@@ -208,7 +207,6 @@ src_configure() {
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
-		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
