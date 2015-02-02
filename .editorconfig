@@ -1,0 +1,13 @@
+# ...................................................... http://EditorConfig.org
+root = true
+
+# .......................................................... General file format
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+# ........................................................... Ebuild file format
+[*.ebuild]
+indent_style = tab
+indent_size = 4
