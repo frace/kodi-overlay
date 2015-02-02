@@ -33,7 +33,7 @@ case ${PV} in
 	MY_PV="${PV}-$RELEASE_NAME"
 	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}.tar.gz"
 
-	# For some reason, the upstream stil inculded an 'xbmc-' prefix
+	# For some reason, the upstream still included an 'xbmc-' prefix
 	# on their download mirror for 14.0.
 	MY_PV="xbmc-${PV}-$RELEASE_NAME"
 
