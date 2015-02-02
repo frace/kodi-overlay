@@ -46,7 +46,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="afp airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp test upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="airplay alsa altivec avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +sdl sse sse2 sftp test upnp udisks upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -61,7 +61,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? (
 		app-pda/libplist
-		media-plugins/kodi-addon-libshairplay
+		media-libs/libshairplay
 	)
 	dev-libs/boost
 	dev-libs/fribidi
@@ -106,7 +106,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-sound/wavpack
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
-	afp? ( net-fs/afpfs-ng )
 	nfs? ( net-fs/libnfs )
 	webserver? ( net-libs/libmicrohttpd[messages] )
 	sftp? ( net-libs/libssh[sftp] )
@@ -223,7 +222,6 @@ src_configure() {
 		--disable-ccache \
 		--disable-optimizations \
 		--enable-gl \
-		$(use_enable afp afpclient) \
 		$(use_enable airplay) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
