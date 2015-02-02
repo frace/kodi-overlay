@@ -9,7 +9,7 @@ if [[ ${PV} ==  ${MY_PV} ]] ; then
 	EGIT_COMMIT="139d5ef"
 fi
 
-DESCRIPTION="A KODI addon providing an Apple airplay and raop protocol server"
+DESCRIPTION="Apple airplay and raop protocol server"
 HOMEPAGE="https://github.com/juhovh/shairplay"
 
 LICENSE="LGPL-2.1 MIT BSD"
@@ -18,8 +18,7 @@ IUSE="static-libs"
 KEYWORDS="~amd64 ~x86"
 
 COMMON_DEPEND=">=dev-libs/openssl-1.0.0
-				media-libs/libao
-				media-tv/kodi[airplay]"
+				media-libs/libao"
 RDEPEND="${COMMON_DEPEND}"
 DEPEND="${COMMON_DEPEND}"
 
