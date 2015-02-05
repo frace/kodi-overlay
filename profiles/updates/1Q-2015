@@ -1,3 +1,4 @@
 move media-tv/xbmc media-tv/kodi
 move media-plugins/xbmc-addon-libshairplay media-plugins/kodi-addon-libshairplay
 move media-plugins/kodi-addon-libshairplay media-libs/libshairplay
+move media-libs/libshairplay net-libs/libshairplay
