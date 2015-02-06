@@ -68,7 +68,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	cec? ( >=dev-libs/libcec-2.1 )
 	dev-libs/libpcre[cxx]
 	>=dev-libs/lzo-2.04
-	dev-libs/tinyxml[stl]
+	>=dev-libs/tinyxml-2.6.2[stl]
 	>=dev-libs/yajl-2.0
 	dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
