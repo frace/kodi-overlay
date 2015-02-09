@@ -35,6 +35,8 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 ## Available ebuilds
         [M] app-admin/istatd-0.5.7
             net-libs/libshairplay-1.0_pre20130416
+            media-plugins/kodi-addon-pvr-14.0_rc3
+            media-plugins/kodi-addon-pvr-9999
             media-tv/kodi-14.0
             media-tv/kodi-9999
 

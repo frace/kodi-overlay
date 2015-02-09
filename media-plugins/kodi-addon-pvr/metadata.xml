@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>xbox</herd>
+<use>
+ <flag name='filmon'>Enable filmon add-on</flag>
+ <flag name='iptv'>Enable iptv add-on</flag>
+</use>
+<upstream>
+	<bugs-to>http://trac.kodi.tv/</bugs-to>
+	<remote-id type="github"opdenkamp/xbmc-pvr-addons</remote-id>
+</upstream>
+</pkgmetadata>

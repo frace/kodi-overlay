@@ -46,9 +46,12 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql mythtv nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
-	pvr? ( mysql )
+	mythtv? (
+		mysql
+		pvr
+	)
 	rsxs? ( X )
 	xrandr? ( X )
 "
@@ -93,6 +96,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-libs/tiff
+	mythtv? ( media-plugins/kodi-addon-pvr )
+	pvr? ( media-plugins/kodi-addon-pvr )
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
 	rtmp? ( media-video/rtmpdump )
@@ -224,7 +229,7 @@ src_configure() {
 		$(use_enable profile profiling) \
 		$(use_enable projectm) \
 		$(use_enable pulseaudio pulse) \
-		$(use_enable pvr mythtv) \
+		$(use_enable mythtv mythtv) \
 		$(use_enable rsxs) \
 		$(use_enable rtmp) \
 		$(use_enable samba) \
