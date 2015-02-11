@@ -1,0 +1,3 @@
+# Masked for the time being since add-ons cannot be build individually
+# https://github.com/frace/kodi-overlay/issues/27
+media-plugins/kodi-addon-pvr
