@@ -12,7 +12,7 @@ inherit eutils python-single-r1 multiprocessing autotools
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
-	inherit git-3
+	inherit git-r3
 	;;
 *_alpha*)
 	MY_PV="${PV/_alpha/a}-$RELEASE_NAME"
@@ -46,7 +46,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql mythtv nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql mythtv nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	mythtv? (
 		mysql
@@ -65,10 +65,13 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		net-libs/libshairplay
 	)
 	dev-libs/boost
+	dev-libs/expat
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
 	cec? ( >=dev-libs/libcec-2.2 )
 	dev-libs/libpcre[cxx]
+	dev-libs/libxml2
+	dev-libs/libxslt
 	>=dev-libs/lzo-2.04
 	>=dev-libs/tinyxml-2.6.2[stl]
 	>=dev-libs/yajl-2.0
@@ -208,9 +211,16 @@ src_configure() {
 	# No configure flage for this #403561
 	export ac_cv_lib_bluetooth_hci_devid=$(usex bluetooth)
 	# Requiring java is asine #434662
-	export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
+	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
+
+	local myconf=""
+	if use raspberry-pi; then
+		myconf="--with-platform=raspberry-pi"
+		myconf="$myconf --enable-player=omxplayer"
+	fi
 
 	econf \
+		$myconf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
