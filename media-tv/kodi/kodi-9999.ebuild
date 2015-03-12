@@ -67,7 +67,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/boost
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
-	cec? ( >=dev-libs/libcec-2.1 )
+	cec? ( >=dev-libs/libcec-2.2 )
 	dev-libs/libpcre[cxx]
 	>=dev-libs/lzo-2.04
 	>=dev-libs/tinyxml-2.6.2[stl]
