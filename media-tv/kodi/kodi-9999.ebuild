@@ -79,7 +79,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/flac
 	media-libs/fontconfig
 	media-libs/freetype
-	>=media-libs/glew-1.5.6
 	media-libs/jasper
 	media-libs/jbigkit
 	>=media-libs/libass-0.9.7
@@ -116,9 +115,9 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	opengl? (
 		virtual/glu
 		virtual/opengl
+		>=media-libs/glew-1.5.6
 	)
 	gles? (
-		virtual/opengl
 		media-libs/mesa[gles2]
 	)
 	vaapi? ( x11-libs/libva[opengl] )
@@ -247,6 +246,10 @@ src_configure() {
 		$(use_enable webserver) \
 		$(use_enable X x11) \
 		$(use_enable xrandr)
+}
+
+src_compile() {
+	emake V=1
 }
 
 src_install() {
