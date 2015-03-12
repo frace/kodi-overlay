@@ -12,7 +12,7 @@ inherit eutils python-single-r1 multiprocessing autotools
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
-	inherit git-2
+	inherit git-3
 	;;
 *_alpha*)
 	MY_PV="${PV/_alpha/a}-$RELEASE_NAME"
@@ -161,6 +161,11 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
 	# The mythtv patch touches configure.ac, so force a regen
 	rm -f configure
+	mv xbmc/visualizations/Goom/goom2k4-0/configure.{in,ac}
+	mv configure.{in,ac}
+	sed -i -e "s:configure.in:configure.ac:" \
+		bootstrap.mk || die "sed failed"
+	epatch "${FILESDIR}"/${P}-gentoo.patch
 
 	# some dirs ship generated autotools, some dont
 	multijob_init
