@@ -1,7 +1,5 @@
 EAPI="5"
 
-RELEASE_NAME="Helix"
-
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
 PYTHON_COMPAT=( python{2_6,2_7} )
@@ -9,35 +7,20 @@ PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
 
+CODENAME="Helix"
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
 	inherit git-r3
 	;;
-*_alpha*)
-	MY_PV="${PV/_alpha/a}-$RELEASE_NAME"
-	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	;;
-*_beta*)
-	MY_PV="${PV/_beta/b}-$RELEASE_NAME"
-	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	;;
-*_rc*)
-	MY_PV="${PV/_rc/rc}-$RELEASE_NAME"
-	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	;;
-*)
-	MY_PV="${PV}-$RELEASE_NAME"
-	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}.tar.gz"
+*|*_p*)
+    MY_PV=${PV/_p/_r}
+    MY_P="${PN}-${MY_PV}"
+    SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
+        http://mirrors.kodi.tv/releases/source/${MY_P}-generated-addons.tar.xz"
+    KEYWORDS="~amd64 ~x86"
 
-	# For some reason, the upstream still included an 'xbmc-' prefix
-	# on their download mirror for 14.0.
-	MY_PV="xbmc-${PV}-$RELEASE_NAME"
-
-	KEYWORDS="~amd64 ~x86"
+    S=${WORKDIR}/xbmc-${PV}-${CODENAME}
 	;;
 esac
 
@@ -48,9 +31,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql mythtv nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
-	mythtv? (
-		mysql
-	)
+	mythtv? ( mysql )
 	rsxs? ( X )
 	xrandr? ( X )
 "
@@ -148,8 +129,6 @@ DEPEND="${COMMON_DEPEND}
 # generated addons package. #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
 
-S=${WORKDIR}/${MY_PV}
-
 pkg_setup() {
 	python-single-r1_pkg_setup
 }
@@ -167,7 +146,6 @@ src_prepare() {
 	mv configure.{in,ac}
 	sed -i -e "s:configure.in:configure.ac:" \
 		bootstrap.mk || die "sed failed"
-	epatch "${FILESDIR}"/${P}-gentoo.patch
 
 	# some dirs ship generated autotools, some dont
 	multijob_init
@@ -182,7 +160,7 @@ src_prepare() {
 	multijob_finish
 	elibtoolize
 
-	emake -f codegenerator.mk
+	[[ ${PV} == "9999" ]] && emake -f codegenerator.mk
 
 	# Disable internal func checks as our USE/DEPEND
 	# stuff handles this just fine already #408395
@@ -200,7 +178,7 @@ src_prepare() {
 	epatch_user #293109
 
 	# Tweak autotool timestamps to avoid regeneration
-	find . -type f -print0 | xargs -0 touch -r configure
+	find . -type f -exec touch -r configure {} +
 }
 
 src_configure() {
@@ -277,8 +255,6 @@ src_install() {
 	)
 	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/kodi/addons/}"
 
-	# Punt simplejson bundle, we use the system one anyway.
-	rm -rf "${ED}"/usr/share/kodi/addons/script.module.simplejson/lib
 	# Remove fonconfig settings that are used only on MacOSX.
 	# Can't be patched upstream because they just find all files and install
 	# them into same structure like they have in git.
@@ -297,8 +273,4 @@ src_install() {
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
-}
-
-pkg_postinst() {
-	elog "Visit http://kodi.wiki/"
 }
