@@ -29,9 +29,8 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql mythtv nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
-	mythtv? ( mysql )
 	rsxs? ( X )
 	xrandr? ( X )
 "
@@ -78,7 +77,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-libs/tiff
-	mythtv? ( media-plugins/kodi-addon-pvr )
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
 	rtmp? ( media-video/rtmpdump )
@@ -138,10 +136,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	#epatch "${FILESDIR}"/${PN}-9999-nomythtv.patch
 	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
-	# The mythtv patch touches configure.ac, so force a regen
-	rm -f configure
 	mv xbmc/visualizations/Goom/goom2k4-0/configure.{in,ac}
 	mv configure.{in,ac}
 	sed -i -e "s:configure.in:configure.ac:" \
@@ -219,7 +214,6 @@ src_configure() {
 		$(use_enable profile profiling) \
 		$(use_enable projectm) \
 		$(use_enable pulseaudio pulse) \
-		$(use_enable mythtv ) \
 		$(use_enable rsxs) \
 		$(use_enable rtmp) \
 		$(use_enable samba) \
