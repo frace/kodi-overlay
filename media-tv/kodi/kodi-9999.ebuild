@@ -29,7 +29,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	rsxs? ( X )
 	xrandr? ( X )
@@ -57,7 +57,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=dev-libs/yajl-2.0
 	dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
-	media-fonts/roboto
+	alsa? ( media-fonts/roboto )
 	media-libs/alsa-lib
 	media-libs/flac
 	media-libs/fontconfig
@@ -136,11 +136,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
-	mv xbmc/visualizations/Goom/goom2k4-0/configure.{in,ac}
-	mv configure.{in,ac}
-	sed -i -e "s:configure.in:configure.ac:" \
-		bootstrap.mk || die "sed failed"
+	epatch "${FILESDIR}"/${P}-no-arm-flags.patch #400617
+	epatch "${FILESDIR}"/${P}-texturepacker.patch
 
 	# some dirs ship generated autotools, some dont
 	multijob_init
@@ -198,6 +195,7 @@ src_configure() {
 		--disable-ccache \
 		--disable-optimizations \
 		$(use_enable airplay) \
+		$(use_enable alsa) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
 		$(use_enable cec libcec) \
