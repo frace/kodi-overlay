@@ -29,7 +29,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	rsxs? ( X )
 	xrandr? ( X )
@@ -127,6 +127,13 @@ DEPEND="${COMMON_DEPEND}
 # generated addons package. #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
 
+CONFIG_CHECK="~IP_MULTICAST"
+
+ERROR_IP_MULTICAST="
+In some cases Kodi needs to access multicast addresses.
+Please consider to enable IP_MULTICAST under Networking options. 
+"
+
 pkg_setup() {
 	python-single-r1_pkg_setup
 }
@@ -183,14 +190,7 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$( which $(usex java java true) )
 
-	local myconf=""
-	if use raspberry-pi; then
-		myconf="--with-platform=raspberry-pi"
-		myconf="$myconf --enable-player=omxplayer"
-	fi
-
 	econf \
-		$myconf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
