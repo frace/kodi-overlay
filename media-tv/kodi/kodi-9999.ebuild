@@ -29,7 +29,7 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test +texturepacker upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
 REQUIRED_USE="
 	rsxs? ( X )
 	xrandr? ( X )
@@ -118,6 +118,10 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
+	texturepacker? (
+		media-libs/libsdl
+		media-libs/sdl-image
+	)
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
@@ -218,6 +222,7 @@ src_configure() {
 		$(use_enable sftp ssh) \
 		$(use_enable spectrum) \
 		$(use_enable test gtest) \
+		$(use_enable texturepacker) \
 		$(use_enable usb libusb) \
 		$(use_enable upnp) \
 		$(use_enable vaapi) \
