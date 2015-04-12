@@ -118,10 +118,6 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
-	texturepacker? (
-		media-libs/libsdl
-		media-libs/sdl-image
-	)
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
