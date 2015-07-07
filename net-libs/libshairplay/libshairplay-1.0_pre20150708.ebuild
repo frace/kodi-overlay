@@ -1,12 +1,12 @@
 EAPI="5"
 
-inherit autotools git-2
+inherit autotools eutils git-2
 
-MY_PV="1.0_pre20130416"
+MY_PV="1.0_pre20150708"
 EGIT_REPO_URI="git://github.com/juhovh/shairplay.git"
 
 if [[ ${PV} ==  ${MY_PV} ]] ; then
-	EGIT_COMMIT="139d5ef"
+	EGIT_COMMIT="0f41ade"
 fi
 
 DESCRIPTION="Apple airplay and raop protocol server"
@@ -17,9 +17,8 @@ SLOT="0"
 IUSE="static-libs"
 KEYWORDS="~amd64 ~x86"
 
-COMMON_DEPEND=">=dev-libs/openssl-1.0.0
-				media-libs/libao"
-RDEPEND="${COMMON_DEPEND}"
+RDEPEND=">=dev-libs/openssl-1.0.0
+		media-libs/libao"
 DEPEND="${COMMON_DEPEND}"
 
 src_unpack() {
@@ -27,9 +26,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/01-${PN}-1.0-fixipv4ipv6race.patch
-	epatch "${FILESDIR}"/02-${PN}-1.0-fixpasswordauthitunes.patch
-
 	eautoreconf
 }
 
@@ -40,5 +36,5 @@ src_configure() {
 
 src_install() {
 	default
-	use static-libs || find "${ED}" -name '*.la' -delete
+	use static-libs || prune_libtool_files --all
 }
