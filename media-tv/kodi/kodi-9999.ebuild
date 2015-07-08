@@ -29,10 +29,9 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test +texturepacker upnp udisks upower +usb vaapi vdpau +waveform webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test +texturepacker upnp udisks upower +usb vaapi vdpau +waveform webserver +X"
 REQUIRED_USE="
 	rsxs? ( X )
-	xrandr? ( X )
 "
 
 COMMON_DEPEND="${PYTHON_DEPS}
@@ -108,7 +107,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-apps/xdpyinfo
 		x11-apps/mesa-progs
 		x11-libs/libXinerama
-		xrandr? ( x11-libs/libXrandr )
+		x11-libs/libXrandr
 		x11-libs/libXrender
 	)"
 RDEPEND="${COMMON_DEPEND}
@@ -225,8 +224,7 @@ src_configure() {
 		$(use_enable vdpau) \
 		$(use_enable waveform) \
 		$(use_enable webserver) \
-		$(use_enable X x11) \
-		$(use_enable xrandr)
+		$(use_enable X x11)
 }
 
 src_compile() {
