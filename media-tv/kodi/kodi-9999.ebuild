@@ -29,7 +29,26 @@ HOMEPAGE="http://kodi.tv/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba +spectrum sftp test +texturepacker upnp udisks upower +usb vaapi vdpau +waveform webserver +X"
+IUSE="
+	airplay alsa avahi
+	bluetooth bluray
+	caps cec css
+	debug
+	+fishbmc
+	gles goom
+	java joystick
+	midi mysql
+	nfs
+	+opengl
+	profile +projectm pulseaudio
+	+rsxs rtmp
+	+samba +spectrum sftp
+	test +texturepacker
+	upnp udisks upower +usb
+	vaapi vdpau
+	+waveform webserver
+	+X
+"
 REQUIRED_USE="
 	rsxs? ( X )
 "
