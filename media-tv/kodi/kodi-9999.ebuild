@@ -49,6 +49,7 @@ IUSE="
 	+waveform webserver
 	+X
 "
+
 REQUIRED_USE="
 	rsxs? ( X )
 "
