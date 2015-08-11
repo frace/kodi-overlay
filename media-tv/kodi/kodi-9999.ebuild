@@ -33,6 +33,7 @@ IUSE="
 	airplay alsa avahi
 	bluetooth bluray
 	caps cec css
+	dbus
 	debug
 	+fishbmc
 	gles goom
@@ -52,6 +53,8 @@ IUSE="
 
 REQUIRED_USE="
 	rsxs? ( X )
+	udisks? ( dbus )
+	upower? ( dbus )
 "
 
 COMMON_DEPEND="${PYTHON_DEPS}
@@ -107,6 +110,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	net-misc/curl
 	samba? ( >=net-fs/samba-3.4.6[smbclient(+)] )
 	bluetooth? ( net-wireless/bluez )
+	dbus? ( sys-apps/dbus )
 	sys-apps/dbus
 	caps? ( sys-libs/libcap )
 	sys-libs/zlib
@@ -219,6 +223,7 @@ src_configure() {
 		$(use_enable bluray libbluray) \
 		$(use_enable cec libcec) \
 		$(use_enable css dvdcss) \
+		$(use_enable dbus) \
 		$(use_enable debug) \
 		$(use_enable fishbmc) \
 		$(use_enable gles) \
