@@ -1,8 +1,8 @@
 EAPI="5"
 
-inherit autotools eutils git-2
+inherit autotools eutils git-r3
 
-MY_PV="1.0_pre20150708"
+MY_PV="1.0_pre20150819"
 EGIT_REPO_URI="git://github.com/juhovh/shairplay.git"
 
 if [[ ${PV} ==  ${MY_PV} ]] ; then
@@ -20,10 +20,6 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND=">=dev-libs/openssl-1.0.0
 		media-libs/libao"
 DEPEND="${COMMON_DEPEND}"
-
-src_unpack() {
-	git-2_src_unpack
-}
 
 src_prepare() {
 	eautoreconf
