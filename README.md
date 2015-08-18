@@ -34,6 +34,7 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 
 ## Available ebuilds
         [M] app-admin/istatd-0.5.7
+			dev-libs/libcrossguid-1.0_pre20150817
             net-libs/libshairplay-1.0_pre20130416
             media-tv/kodi-9999
 
