@@ -71,7 +71,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
 	cec? ( >=dev-libs/libcec-3.0 )
-	dev-libs/libcrossguid
+	dev-libs/crossguid
 	dev-libs/libpcre[cxx]
 	dev-libs/libxml2
 	dev-libs/libxslt
