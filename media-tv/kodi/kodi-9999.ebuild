@@ -85,6 +85,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/flac
 	media-libs/fontconfig
 	media-libs/freetype
+	texturepacker? ( >=media-libs/giflib-5.0.5 )
 	media-libs/jasper
 	media-libs/jbigkit
 	>=media-libs/libass-0.9.7
