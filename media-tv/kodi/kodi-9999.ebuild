@@ -64,7 +64,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? (
 		app-pda/libplist
-		net-libs/libshairplay
+		net-libs/shairplay
 	)
 	dev-libs/boost
 	dev-libs/expat

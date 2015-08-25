@@ -1,12 +1,14 @@
 EAPI="5"
 
-inherit autotools eutils git-r3
+inherit autotools eutils
 
-MY_PV="1.0_pre20150819"
-EGIT_REPO_URI="git://github.com/juhovh/shairplay.git"
-
-if [[ ${PV} ==  ${MY_PV} ]] ; then
-	EGIT_COMMIT="0f41ade"
+if [[ ${PV} == "9999" ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="git://github.com/juhovh/shairplay.git"
+else
+	EGIT_COMMIT="0f41ade2678f374aa8446d127d6aa9d5a3d428da"
+	SRC_URI="https://github.com/juhovh/shairplay/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 fi
 
 DESCRIPTION="Apple airplay and raop protocol server"
@@ -14,8 +16,8 @@ HOMEPAGE="https://github.com/juhovh/shairplay"
 
 LICENSE="LGPL-2.1 MIT BSD"
 SLOT="0"
-IUSE="static-libs"
 KEYWORDS="~amd64 ~x86"
+IUSE="static-libs"
 
 RDEPEND=">=dev-libs/openssl-1.0.0
 		media-libs/libao"
