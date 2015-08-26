@@ -5,9 +5,9 @@ EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools
+inherit autotools eutils linux-info python-single-r1 multiprocessing autotools
 
-CODENAME="Helix"
+CODENAME="Isengard"
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
@@ -17,7 +17,8 @@ case ${PV} in
     MY_PV=${PV/_p/_r}
     MY_P="${PN}-${MY_PV}"
     SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
-        http://mirrors.kodi.tv/releases/source/${MY_P}-generated-addons.tar.xz"
+		https://github.com/xbmc/xbmc/archive/${PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
+		!java? ( http://mirrors.kodi.tv/releases/source/${MY_P}-generated-addons.tar.xz )"
     KEYWORDS="~amd64 ~x86"
 
     S=${WORKDIR}/xbmc-${PV}-${CODENAME}
@@ -25,7 +26,7 @@ case ${PV} in
 esac
 
 DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
-HOMEPAGE="http://kodi.tv/"
+HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,8 +34,7 @@ IUSE="
 	airplay alsa avahi
 	bluetooth bluray
 	caps cec css
-	dbus
-	debug
+	dbus debug
 	+fishbmc
 	gles goom
 	java joystick
@@ -43,9 +43,9 @@ IUSE="
 	+opengl
 	profile +projectm pulseaudio
 	+rsxs rtmp
-	+samba +spectrum sftp
+	+samba sftp +spectrum
 	test +texturepacker
-	upnp udisks upower +usb
+	udisks upnp upower +usb
 	vaapi vdpau
 	+waveform webserver
 	+X
@@ -67,21 +67,21 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		net-libs/shairplay
 	)
 	dev-libs/boost
+	dev-libs/crossguid
 	dev-libs/expat
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
 	cec? ( >=dev-libs/libcec-3.0 )
-	dev-libs/crossguid
 	dev-libs/libpcre[cxx]
 	dev-libs/libxml2
 	dev-libs/libxslt
 	>=dev-libs/lzo-2.04
-	>=dev-libs/tinyxml-2.6.2[stl]
+	dev-libs/tinyxml[stl]
 	>=dev-libs/yajl-2.0
 	dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
-	alsa? ( media-fonts/roboto )
-	media-libs/alsa-lib
+	media-fonts/roboto
+	alsa? ( media-libs/alsa-lib )
 	media-libs/flac
 	media-libs/fontconfig
 	media-libs/freetype
@@ -113,7 +113,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	samba? ( >=net-fs/samba-3.4.6[smbclient(+)] )
 	bluetooth? ( net-wireless/bluez )
 	dbus? ( sys-apps/dbus )
-	sys-apps/dbus
 	caps? ( sys-libs/libcap )
 	sys-libs/zlib
 	virtual/jpeg
@@ -137,6 +136,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrender
 	)"
 RDEPEND="${COMMON_DEPEND}
+	!media-tv/xbmc
 	udisks? ( sys-fs/udisks:0 )
 	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )"
 DEPEND="${COMMON_DEPEND}
@@ -168,19 +168,22 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-no-arm-flags.patch #400617
-	epatch "${FILESDIR}"/${P}-texturepacker.patch
+	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
+	epatch "${FILESDIR}"/${PN}-9999-texturepacker.patch
 
-	# some dirs ship generated autotools, some dont
+	# some dirs ship generated autotools, some don't
 	multijob_init
-	local d
-	for d in $(printf 'f:\n\t@echo $(BOOTSTRAP_TARGETS)\ninclude bootstrap.mk\n' | emake -f - f) ; do
-		[[ -e ${d} ]] && continue
-		pushd ${d/%configure/.} >/dev/null || die
-		AT_NOELIBTOOLIZE="yes" AT_TOPLEVEL_EAUTORECONF="yes" \
-		multijob_child_init eautoreconf
-		popd >/dev/null
-	done
+    local d dirs=(
+        tools/depends/native/TexturePacker/src/configure
+        $(printf 'f:\n\t@echo $(BOOTSTRAP_TARGETS)\ninclude bootstrap.mk\n' | emake -f - f)
+    )
+    for d in "${dirs[@]}" ; do
+        [[ -e ${d} ]] && continue
+        pushd ${d/%configure/.} >/dev/null || die
+        AT_NOELIBTOOLIZE="yes" AT_TOPLEVEL_EAUTORECONF="yes" \
+        multijob_child_init eautoreconf
+        popd >/dev/null
+    done
 	multijob_finish
 	elibtoolize
 
@@ -223,6 +226,7 @@ src_configure() {
 		$(use_enable alsa) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
+		$(use_enable caps libcap) \
 		$(use_enable cec libcec) \
 		$(use_enable css dvdcss) \
 		$(use_enable dbus) \
@@ -245,8 +249,8 @@ src_configure() {
 		$(use_enable spectrum) \
 		$(use_enable test gtest) \
 		$(use_enable texturepacker) \
-		$(use_enable usb libusb) \
 		$(use_enable upnp) \
+		$(use_enable usb libusb) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \
 		$(use_enable waveform) \
