@@ -101,6 +101,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-libs/tiff
+	media-sound/dcadec
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
 	rtmp? ( media-video/rtmpdump )
