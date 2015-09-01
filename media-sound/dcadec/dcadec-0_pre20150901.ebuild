@@ -20,7 +20,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="virtual/pkgconfig"
-RDEPEND="${RDEPEND}"
+RDEPEND="${DEPEND}"
 
 src_install() {
 	base_src_install PREFIX="${EPREFIX}/usr"
