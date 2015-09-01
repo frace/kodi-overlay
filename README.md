@@ -32,12 +32,8 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 [docs-layman]: http://www.gentoo.org/proj/en/overlays/userguide.xml
 
 
-## Available ebuilds
-        [M] app-admin/istatd-0.5.7
-            net-libs/shairplay-0_pre20150825
-            media-tv/kodi-9999
-
-Possibly ebuilds become masked [M] if
+## Ebuild status
+Ebuilds could become masked [M] if
 - they are unmaintained.
 - they are not in sync with upstream ebuilds.
 - they are in a very unstable state.
