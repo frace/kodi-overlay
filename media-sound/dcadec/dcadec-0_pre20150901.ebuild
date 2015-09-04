@@ -20,7 +20,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="virtual/pkgconfig"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	!media-libs/libdca"
 
 src_install() {
 	base_src_install PREFIX="${EPREFIX}/usr"
