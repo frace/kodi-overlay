@@ -32,7 +32,7 @@ SLOT="0"
 IUSE="
 	airplay alsa avahi
 	bluetooth bluray
-	caps cec css
+	caps cec 
 	dbus debug
 	gles 
 	java joystick
@@ -87,7 +87,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/jbigkit
 	>=media-libs/libass-0.9.7
 	bluray? ( >=media-libs/libbluray-0.7.0 )
-	css? ( media-libs/libdvdcss )
 	media-libs/libmad
 	media-libs/libmodplug
 	media-libs/libogg
@@ -225,7 +224,6 @@ src_configure() {
 		$(use_enable bluray libbluray) \
 		$(use_enable caps libcap) \
 		$(use_enable cec libcec) \
-		$(use_enable css dvdcss) \
 		$(use_enable dbus) \
 		$(use_enable debug) \
 		$(use_enable gles) \
