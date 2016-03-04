@@ -23,13 +23,13 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 1. `emerge -av layman`
 2. Modify `/etc/layman/layman.cfg`:
 
-        overlays  : http://www.gentoo.org/proj/en/overlays/repositories.xml
+        overlays  : https://api.gentoo.org/overlays/repositories.xml
                     https://raw.github.com/frace/kodi-overlay/master/repositories.xml
 
 3. `layman --list`
 4. `layman --add kodi-overlay`
 
-[docs-layman]: http://www.gentoo.org/proj/en/overlays/userguide.xml
+[docs-layman]: https://wiki.gentoo.org/wiki/Project:Overlays/User_Guide
 
 
 ## Ebuild status
@@ -63,14 +63,14 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 [docs-devmanual-ebuild]: https://devmanual.gentoo.org/ebuild-writing
 [docs-devmanual-ebuild-format]: https://devmanual.gentoo.org/ebuild-writing/file-format
 [docs-gentoo-colors]: https://www.gentoo.org/proj/en/desktop/artwork/colors.xml
-[docs-gentoo-portage]: http://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html
-[docs-gentoo-makeconf]: http://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
+[docs-gentoo-portage]: https://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html
+[docs-gentoo-makeconf]: https://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
 
 ### KODI docs
 - [KODI@Gentoo Linux Wiki][docs-gentoo-wiki]
 - [KODI Wiki Manual][docs-kodi-wiki]
 
-[docs-gentoo-wiki]: http://wiki.gentoo.org/wiki/Kodi
+[docs-gentoo-wiki]: https://wiki.gentoo.org/wiki/Kodi
 [docs-kodi-wiki]: http://kodi.wiki
 
 
@@ -83,6 +83,6 @@ to help to improve the official [KODI][external-kodi] ebuild and to help to fix 
 [contrib-people]: https://github.com/frace/kodi-overlay/graphs/contributors
 
 
-[external-gentoo]: http://www.gentoo.org
-[external-kodi]: http://kodi.tv
-[external-portage]: http://wiki.gentoo.org/wiki/Project:Portage
+[external-gentoo]: https://www.gentoo.org
+[external-kodi]: https://kodi.tv
+[external-portage]: https://wiki.gentoo.org/wiki/Project:Portage
