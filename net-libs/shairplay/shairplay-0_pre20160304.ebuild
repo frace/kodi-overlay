@@ -6,7 +6,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="git://github.com/juhovh/shairplay.git"
 else
-	EGIT_COMMIT="0f41ade2678f374aa8446d127d6aa9d5a3d428da"
+	EGIT_COMMIT="498bc5bcdd305e04721f94a04b9f26a7da72673f"
 	SRC_URI="https://github.com/juhovh/shairplay/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 fi
