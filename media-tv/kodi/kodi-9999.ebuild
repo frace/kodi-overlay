@@ -268,11 +268,13 @@ src_install() {
 	rm -rf "${ED}"/usr/share/kodi/system/players/dvdplayer/etc
 
 	# Replace bundled fonts with system ones
-	rm -rf "${ED}"/usr/share/kodi/addons/skin.confluence/fonts/Roboto-* || die
-	dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
-		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Regular.ttf
-	dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
-		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Bold.ttf
+	rm "${ED}"/usr/share/kodi/addons/skin.estuary/fonts/{Anonymous,Lato}* || die
+	dosym /usr/share/fonts/corefonts/AnonymousPro.ttf \
+		/usr/share/kodi/addons/skin.estuary/fonts/AnonymousPro.ttf
+	dosym /usr/share/fonts/corefonts/Lato-Regular.ttf \
+		/usr/share/kodi/addons/skin.estuary/fonts/Lato-Regular.ttf
+	dosym /usr/share/fonts/corefonts/Lato-Bold.ttf.ttf \
+		/usr/share/kodi/addons/skin.estuary/fonts/Lato-Bold.ttf.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
