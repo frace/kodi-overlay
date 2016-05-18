@@ -58,7 +58,8 @@ REQUIRED_USE="
 	upower? ( dbus )
 "
 
-COMMON_DEPEND="${PYTHON_DEPS}
+COMMON_DEPEND="
+	${PYTHON_DEPS}
 	app-arch/bzip2
 	app-arch/unzip
 	app-arch/zip
@@ -126,12 +127,16 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXinerama
 		x11-libs/libXrandr
 		x11-libs/libXrender
-	)"
-RDEPEND="${COMMON_DEPEND}
+	)
+"
+RDEPEND="
+	${COMMON_DEPEND}
 	!media-tv/xbmc
 	udisks? ( sys-fs/udisks:0 )
-	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )"
-DEPEND="${COMMON_DEPEND}
+	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )
+"
+DEPEND="
+	${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-libs/crossguid
@@ -142,7 +147,8 @@ DEPEND="${COMMON_DEPEND}
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )
 	test? ( dev-cpp/gtest )
-	virtual/pkgconfig"
+	virtual/pkgconfig
+"
 # Force java for latest git version to avoid having to hand maintain the
 # generated addons package. #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
