@@ -35,7 +35,7 @@ IUSE="
 	caps cec 
 	dbus debug
 	gles 
-	java joystick
+	java 
 	midi mysql
 	nfs
 	+opengl
@@ -93,7 +93,6 @@ COMMON_DEPEND="
 	media-libs/libogg
 	media-libs/libpng:0=
 	media-libs/libsamplerate
-	joystick? ( media-libs/libsdl2 )
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-sound/dcadec
@@ -233,7 +232,6 @@ src_configure() {
 		$(use_enable dbus) \
 		$(use_enable debug) \
 		$(use_enable gles) \
-		$(use_enable joystick) \
 		$(use_enable midi mid) \
 		$(use_enable mysql) \
 		$(use_enable nfs) \
