@@ -41,7 +41,7 @@ IUSE="
 	+opengl
 	profile pulseaudio
 	rtmp
-	+samba sftp 
+	+samba sftp systemd
 	test +texturepacker
 	udisks upnp upower +usb
 	vaapi vdpau
@@ -132,7 +132,10 @@ RDEPEND="
 	${COMMON_DEPEND}
 	!media-tv/xbmc
 	udisks? ( sys-fs/udisks:0 )
-	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )
+	upower? (
+		systemd? ( sys-power/upower )
+		!systemd? ( sys-power/upower-pm-utils )
+	)
 "
 DEPEND="
 	${COMMON_DEPEND}
