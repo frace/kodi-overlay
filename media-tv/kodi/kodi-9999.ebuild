@@ -270,15 +270,6 @@ src_install() {
 	# them into same structure like they have in git.
 	rm -rf "${ED}"/usr/share/kodi/system/players/dvdplayer/etc
 
-	# Replace bundled fonts with system ones
-	rm "${ED}"/usr/share/kodi/addons/skin.estuary/fonts/{Anonymous,Lato}* || die
-	dosym /usr/share/fonts/corefonts/AnonymousPro.ttf \
-		/usr/share/kodi/addons/skin.estuary/fonts/AnonymousPro.ttf
-	dosym /usr/share/fonts/corefonts/Lato-Regular.ttf \
-		/usr/share/kodi/addons/skin.estuary/fonts/Lato-Regular.ttf
-	dosym /usr/share/fonts/corefonts/Lato-Bold.ttf.ttf \
-		/usr/share/kodi/addons/skin.estuary/fonts/Lato-Bold.ttf.ttf
-
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
 }
