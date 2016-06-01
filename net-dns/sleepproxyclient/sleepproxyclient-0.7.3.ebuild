@@ -30,5 +30,8 @@ src_install() {
 	insinto /etc/pm/sleep.d
 	doins 00_sleepproxyclient
 
+	insinto /etc
+	newins debian/sleepproxyclient.default sleepproxyclient
+
 	dodoc README.md
 }
