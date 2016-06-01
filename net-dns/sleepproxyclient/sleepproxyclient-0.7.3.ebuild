@@ -22,7 +22,7 @@ RDEPEND="
 "
 
 src_prepare() {
-    epatch "${FILESDIR}"/${P}-find-config.patch
+	epatch "${FILESDIR}"/${P}-find-config.patch
 	epatch "${FILESDIR}"/${P}-python27.patch
 }
 
