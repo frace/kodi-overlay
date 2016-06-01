@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="examples"
 
 RDEPEND="
-	dev-python/dnspython
+	dev-python/dnspython:py2
 	dev-python/netifaces
 	net-dns/avahi
 	sys-power/upower-pm-utils
