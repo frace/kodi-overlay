@@ -14,7 +14,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="examples"
 
-DEPEND=""
 RDEPEND="
 	dev-python/dnspython
 	dev-python/netifaces
