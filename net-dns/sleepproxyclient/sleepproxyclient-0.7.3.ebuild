@@ -21,13 +21,17 @@ RDEPEND="
 	sys-power/upower-pm-utils
 "
 
-src_install() {
-	insinto /usr/share/${PN}/scripts
-	doins sleepproxyclient.py sleepproxyclient.sh
-	use examples && doins checkSleep.sh
+src_prepare() {
+    epatch "${FILESDIR}"/${P}-find-config.patch
+}
 
-	insinto /etc/pm/sleep.d
-	doins 00_sleepproxyclient
+src_install() {
+	exeinto /usr/share/${PN}/scripts
+	doexe sleepproxyclient.py sleepproxyclient.sh
+	use examples && doexe checkSleep.sh
+
+	exeinto /etc/pm/sleep.d
+	doexe 00_sleepproxyclient
 
 	insinto /etc
 	newins debian/sleepproxyclient.default sleepproxyclient
