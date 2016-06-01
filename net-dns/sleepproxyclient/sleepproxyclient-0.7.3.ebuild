@@ -1,6 +1,8 @@
 EAPI="5"
 
-inherit eutils
+PYTHON_COMPAT=( python2_7 )
+
+inherit eutils python-r1
 
 DESCRIPTION="A SleepProxyClient implementation"
 HOMEPAGE="https://github.com/awein/SleepProxyClient"
@@ -15,8 +17,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE="examples"
 
 RDEPEND="
-	dev-python/dnspython:py2
-	dev-python/netifaces
+	dev-python/dnspython[${PYTHON_USEDEP}]
+	dev-python/netifaces[${PYTHON_USEDEP}]
 	net-dns/avahi
 	sys-power/upower-pm-utils
 "
