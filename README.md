@@ -13,12 +13,12 @@ There are two easy ways to get the overlay onto your system:
 3. `git clone git://github.com/frace/kodi-overlay.git`
 4. Create `/etc/portage/repos.conf/kodi-overlay.conf`:
 
-	[kodi-overlay]
-	masters = gentoo
-	location = /usr/local/portage/kodi-overlay
-	sync-type = git
-	sync-uri = git://github.com/frace/kodi-overlay.git
-	auto-sync = yes
+        [kodi-overlay]
+        masters = gentoo
+        location = /usr/local/portage/kodi-overlay
+        sync-type = git
+        sync-uri = git://github.com/frace/kodi-overlay.git
+        auto-sync = yes
 
 
 ### 2. Layman
