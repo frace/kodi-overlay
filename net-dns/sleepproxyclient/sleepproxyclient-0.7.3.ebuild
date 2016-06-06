@@ -1,4 +1,4 @@
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -24,11 +24,10 @@ RDEPEND="
 "
 
 DOCS=( README.md )
-
-src_prepare() {
-	epatch "${FILESDIR}"/${P}-find-config.patch
-	epatch "${FILESDIR}"/${P}-python27.patch
-}
+PATCHES=(
+    "${FILESDIR}"/${P}-find-config.patch
+	"${FILESDIR}"/${P}-python27.patch
+)
 
 src_install() {
 	default

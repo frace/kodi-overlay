@@ -1,5 +1,5 @@
---- sleepproxyclient.sh	2016-06-02 00:22:17.000000000 +0200
-+++ sleepproxyclient.sh.new	2016-06-02 00:23:24.000000000 +0200
+--- scripts/sleepproxyclient.sh	2016-06-02 00:22:17.000000000 +0200
++++ scripts/sleepproxyclient.sh.new	2016-06-02 00:23:24.000000000 +0200
 @@ -45,6 +45,6 @@
  SCRIPTDIR=`dirname $0`
  

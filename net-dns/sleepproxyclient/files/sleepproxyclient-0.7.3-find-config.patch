@@ -1,5 +1,5 @@
---- sleepproxyclient.sh	2016-06-01 21:34:30.000000000 +0200
-+++ sleepproxyclient.sh.new	2016-06-01 21:39:06.000000000 +0200
+--- scripts/sleepproxyclient.sh	2016-06-01 21:34:30.000000000 +0200
++++ scripts/sleepproxyclient.sh.new	2016-06-01 21:39:06.000000000 +0200
 @@ -21,7 +21,8 @@
  
  
