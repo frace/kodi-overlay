@@ -30,8 +30,8 @@ RDEPEND="
 
 DOCS=( README.md )
 PATCHES=(
-	"${FILESDIR}"/${P}-find-config.patch
-	"${FILESDIR}"/${P}-python27.patch
+	"${FILESDIR}"/${PN}-0.7.3-find-config.patch
+	"${FILESDIR}"/${PN}-0.7.3-python27.patch
 )
 
 src_install() {
