@@ -25,7 +25,7 @@ RDEPEND="
 
 DOCS=( README.md )
 PATCHES=(
-    "${FILESDIR}"/${P}-find-config.patch
+	"${FILESDIR}"/${P}-find-config.patch
 	"${FILESDIR}"/${P}-python27.patch
 )
 
