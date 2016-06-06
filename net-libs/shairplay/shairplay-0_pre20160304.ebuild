@@ -19,9 +19,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="static-libs"
 
-RDEPEND=">=dev-libs/openssl-1.0.0
-		media-libs/libao"
-DEPEND="${COMMON_DEPEND}"
+RDEPEND="
+	>=dev-libs/openssl-1.0.0
+	media-libs/libao
+"
+
+DEPEND="
+	${COMMON_DEPEND}
+"
 
 src_prepare() {
 	eautoreconf
