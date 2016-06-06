@@ -23,12 +23,16 @@ RDEPEND="
 	sys-power/upower-pm-utils
 "
 
+DOCS=( README.md )
+
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-find-config.patch
 	epatch "${FILESDIR}"/${P}-python27.patch
 }
 
 src_install() {
+	default
+
 	exeinto /usr/share/${PN}/scripts
 	doexe sleepproxyclient.py sleepproxyclient.sh
 	use examples && doexe checkSleep.sh
@@ -38,6 +42,4 @@ src_install() {
 
 	insinto /etc
 	newins debian/sleepproxyclient.default sleepproxyclient
-
-	dodoc README.md
 }
