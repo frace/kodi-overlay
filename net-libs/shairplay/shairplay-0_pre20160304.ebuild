@@ -1,4 +1,4 @@
-EAPI="5"
+EAPI="6"
 
 inherit autotools eutils
 
@@ -29,6 +29,7 @@ DEPEND="
 "
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
