@@ -36,5 +36,5 @@ src_configure() {
 
 src_install() {
 	default
-	use static-libs || prune_libtool_files --all
+	prune_libtool_files --all
 }
