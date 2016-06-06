@@ -14,7 +14,7 @@ fi
 DESCRIPTION="Apple airplay and raop protocol server"
 HOMEPAGE="https://github.com/juhovh/shairplay"
 
-LICENSE="LGPL-2.1 MIT BSD"
+LICENSE="BSD LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="static-libs"
