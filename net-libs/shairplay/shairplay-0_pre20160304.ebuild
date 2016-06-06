@@ -24,10 +24,6 @@ RDEPEND="
 	media-libs/libao
 "
 
-DEPEND="
-	${COMMON_DEPEND}
-"
-
 src_prepare() {
 	default
 	eautoreconf
