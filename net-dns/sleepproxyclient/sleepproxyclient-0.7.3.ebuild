@@ -2,7 +2,7 @@ EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python-r1
+inherit eutils python-single-r1
 
 DESCRIPTION="A SleepProxyClient implementation"
 HOMEPAGE="https://github.com/awein/SleepProxyClient"
