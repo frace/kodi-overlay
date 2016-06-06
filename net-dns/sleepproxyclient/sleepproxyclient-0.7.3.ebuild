@@ -30,8 +30,6 @@ PATCHES=(
 )
 
 src_install() {
-	default
-
 	exeinto /usr/share/${PN}/scripts
 	doexe sleepproxyclient.py sleepproxyclient.sh
 	use examples && doexe checkSleep.sh
@@ -41,4 +39,6 @@ src_install() {
 
 	insinto /etc
 	newins debian/sleepproxyclient.default sleepproxyclient
+
+	einstalldocs
 }
