@@ -25,6 +25,7 @@ RDEPEND="
 	dev-python/dnspython[${PYTHON_USEDEP}]
 	dev-python/netifaces[${PYTHON_USEDEP}]
 	net-dns/avahi
+	examples? ( sys-devel/bc )
 	sys-power/upower-pm-utils
 "
 
