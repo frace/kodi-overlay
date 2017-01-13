@@ -37,10 +37,11 @@ If you don't know what `layman` is then please read the [documentation][docs-lay
 
 
 ## Ebuild status
-Ebuilds could become masked [M] if
+Ebuilds could become masked [M] for various reasons. E.g. if
 - they are unmaintained.
 - they are not in sync with upstream ebuilds.
 - they are in a very unstable state.
+- upstream is no longer maintaining the project.
 
 
 ## Bugs
