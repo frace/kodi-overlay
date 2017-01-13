@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="static-libs"
 
 RDEPEND="
-	>=dev-libs/openssl-1.0.0
+	>=dev-libs/openssl-1.0.0:0=
 	media-libs/libao
 "
 
