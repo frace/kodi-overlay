@@ -1,6 +1,6 @@
 EAPI="6"
 
-inherit autotools eutils
+inherit autotools 
 
 if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
@@ -36,5 +36,5 @@ src_configure() {
 
 src_install() {
 	default
-	prune_libtool_files --all
+	find "${D}" -name '*.la' -delete || die
 }
