@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd></herd>
 <use>
  <flag name='static-libs'>Build static versions of dynamic libraries as well</flag>
 </use>
+<maintainer type="person">
+ <email>frace@users.noreply.github.com</email>
+ <name>frace</name>
+</maintainer>
+<maintainer type="project">
+ <email>proxy-maint@gentoo.org</email>
+ <name>Proxy Maintainers</name>
+</maintainer>
 </pkgmetadata>
