@@ -24,7 +24,7 @@ DEPEND="
 "
 
 RDEPEND="
-	alac? ( 
+	alac? (
 		media-sound/alac_decoder
 		net-libs/shairplay[tools]
 	)
