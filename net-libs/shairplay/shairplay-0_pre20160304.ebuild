@@ -16,11 +16,22 @@ HOMEPAGE="https://github.com/juhovh/shairplay"
 LICENSE="BSD LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="static-libs"
+IUSE="alac static-libs tools"
+
+DEPEND="
+	sys-devel/libtool
+	tools? ( media-libs/libao )
+"
 
 RDEPEND="
-	>=dev-libs/openssl-1.0.0:0=
-	media-libs/libao
+	alac? ( 
+		media-sound/alac_decoder
+		net-libs/shairplay[tools]
+	)
+	tools? (
+		dev-libs/openssl:0=
+		net-dns/avahi[mdnsresponder-compat]
+	)
 "
 
 src_prepare() {
