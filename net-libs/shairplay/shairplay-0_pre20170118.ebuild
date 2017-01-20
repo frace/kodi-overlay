@@ -8,6 +8,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	EGIT_COMMIT="498bc5bcdd305e04721f94a04b9f26a7da72673f"
 	SRC_URI="https://github.com/juhovh/shairplay/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="Apple airplay and raop protocol server"
@@ -15,7 +16,6 @@ HOMEPAGE="https://github.com/juhovh/shairplay"
 LICENSE="BSD LGPL-2.1 MIT"
 
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 IUSE="alac static-libs tools"
 
 DEPEND="
