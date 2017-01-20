@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <longdescription>A system monitoring daemon</longdescription>
+    <use>
+        <flag name='lm_sensors'>Add linux lm_sensors (hardware sensors) support.</flag>
+        <flag name='sqlite'>Add support for sqlite - embedded sql database.</flag>
+        <flag name='zeroconf'>Enables support for zero-configuration networking via avahi.</flag>
+    </use>
+    <maintainer type="person">
+        <email>frace@users.noreply.github.com</email>
+        <name>frace</name>
+    </maintainer>
+    <maintainer type="project">
+        <email>proxy-maint@gentoo.org</email>
+        <name>Proxy Maintainers</name>
+    </maintainer>
+    <upstream>
+        <bugs-to>https://github.com/bjango/istatserverlinux</bugs-to>
+        <remote-id type="github">bjango/istatserverlinux</remote-id>
+    </upstream>
+</pkgmetadata>
